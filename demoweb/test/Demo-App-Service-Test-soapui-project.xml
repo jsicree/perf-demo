@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="2e029462-f326-4f16-98ed-682c5fde7954" activeEnvironment="Default" name="Demo App Service Test" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="e80572df-d01c-4e6b-a6c8-4d18015757b7" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8080" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:8080</con:endpoint></con:endpoints><con:resource name="getAllAccounts" path="/demoweb/service/getAllAccounts" id="25dc85cd-fc06-4afd-921f-f9feaf9f9777"><con:settings/><con:parameters/><con:method name="Method 1" id="b3f433fb-2e54-40b1-a5af-c5f656d463fe" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="04bd4d5d-0210-49a9-abeb-70f418766b82" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:originalUri>http://localhost/demoweb/service/getAllBands</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="computeCompoundInterest" path="/demoweb/calculate/computeCompoundInterest" id="25dc85cd-fc06-4afd-921f-f9feaf9f9777"><con:settings/><con:parameters/><con:method name="Method 1" id="18b6bdf3-b8fd-40e8-965d-e1e0f519740a" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/html;charset=utf-8</con:mediaType><con:status>400 406</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:com="http://localhost/demoweb/calculate/computeCompoundInterest">com:Response</con:element></con:representation><con:request name="monthly_3_acct_no_breakdowns" id="83201707-339c-43c4-9e7b-14b6d57556a2" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>{
+	"accounts": [
+		{	"identifier": "ACCOUNT-001",
+			"balance": "12000",
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-002",
+			"balance": "10500.00",
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-003",
+			"balance": "15275.00",
+			"rate": "0.0180" 
+		} 			
+	],
+	"startDate": "2017-12-21T06:00:00.000Z",	
+	"intervals": "60",
+	"frequency": "MONTHLY",
+	"includeBreakdowns": "false"	
+}
+
+</con:request><con:originalUri>http://localhost/demoweb/calculate/computeCompoundInterest</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="yearly_3_acct_no_breakdowns" id="83201707-339c-43c4-9e7b-14b6d57556a2" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>{
+	"accounts": [
+		{	"identifier": "ACCOUNT-001",
+			"balance": "12000",
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-002",
+			"balance": "10500.00",
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-003",
+			"balance": "15275.00",
+			"rate": "0.0180" 
+		} 			
+	],
+	"startDate": "2017-12-21T06:00:00.000Z",	
+	"intervals": "5",
+	"frequency": "YEARLY",
+	"includeBreakdowns": "false"	
+}
+
+</con:request><con:originalUri>http://localhost/demoweb/calculate/computeCompoundInterest</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="monthly_3_acct_w_breakdowns" id="83201707-339c-43c4-9e7b-14b6d57556a2" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>{
+	"accounts": [
+		{	"identifier": "ACCOUNT-001",
+			"balance": "12000",
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-002",
+			"balance": "10500.00",
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-003",
+			"balance": "15275.00",
+			"rate": "0.0180" 
+		} 			
+	],
+	"startDate": "2017-12-21T06:00:00.000Z",	
+	"intervals": "60",
+	"frequency": "MONTHLY",
+	"includeBreakdowns": "true"	
+}
+
+</con:request><con:originalUri>http://localhost/demoweb/calculate/computeCompoundInterest</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request><con:request name="yearly_3_acct_w_breakdowns" id="83201707-339c-43c4-9e7b-14b6d57556a2" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>{
+	"accounts": [
+		{	"identifier": "ACCOUNT-001",
+			"balance": "12000",
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-002",
+			"balance": "10500.00",
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-003",
+			"balance": "15275.00",
+			"rate": "0.0180" 
+		} 			
+	],
+	"startDate": "2017-12-21T06:00:00.000Z",	
+	"intervals": "5",
+	"frequency": "YEARLY",
+	"includeBreakdowns": "true"	
+}
+
+</con:request><con:originalUri>http://localhost/demoweb/calculate/computeCompoundInterest</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

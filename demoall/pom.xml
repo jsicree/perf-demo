@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>demo.app</groupId>
+  <artifactId>demoall</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>demoall - Parent POM</name>
+	<modules>
+		<module>../demoapp</module>
+		<module>../demoweb</module>
+	</modules>
+	<properties>
+		<!-- Maven Javadoc Plugin -->
+		<maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+
+		<!-- Apache Tomcat 7 Maven Plugin -->
+		<tomcat7-maven-plugin.version>2.1</tomcat7-maven-plugin.version>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>${tomcat7-maven-plugin.version}</version>
+				<configuration>
+					<!-- the server and admin credentials are defined in settings.xml -->
+					<!-- <server>tomcat</server> -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
