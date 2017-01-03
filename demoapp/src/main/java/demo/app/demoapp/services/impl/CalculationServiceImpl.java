@@ -51,19 +51,19 @@ public class CalculationServiceImpl implements CalculationService {
 		result.setAccountIdentifier(a.getIdentifier());
 		result.setStartDate(startDate);
 		result.setIntervals(intervals);
-		result.setStartBalance(new Money(a.getBalance()));
+		result.setStartBalance(a.getBalance());
 		result.setFrequency(freq);
 		result.setInterestRate(a.getRate());
 
 		Map<Date, Money> res = new HashMap<Date, Money>();
-		Double currentBalance = a.getBalance();
-		res.put(startDate, new Money(a.getBalance()));
+		Money currentBalance = a.getBalance();
+		res.put(startDate, a.getBalance());
 
 		for (Date d : intervalList) {
-			Double interest = currentBalance * a.getRate();
-			currentBalance += interest;
-			res.put(d, new Money(currentBalance));
-			result.setEndBalance(new Money(currentBalance));
+			Double interest = currentBalance.getValue() * a.getRate();
+			currentBalance.setValue(currentBalance.getValue() + interest);
+			res.put(d, currentBalance);
+			result.setEndBalance(currentBalance);
 			long delay = new Double(Math.random() * 50).longValue(); 
 			//log.info("Delay (ms): " + delay);
 			try {

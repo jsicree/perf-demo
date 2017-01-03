@@ -18,7 +18,8 @@
 <header>Demo - Home</header>
 <hr/>
 <p>The home page for the Dynatrace demo project.</p>
-<p>This application was dpeloyed using the AWS CodePipeline.</p>	
+<p>This purpose of this application is to provide a set of REST web services that can be analyzed via Dynatrace for performance issues.</p>
+<p>This application can be deployed via the AWS CodePipeline.</p>	
 
 <hr/>
 <footer>Page Generated: <%= new Date() %></footer>	

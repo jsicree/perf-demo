@@ -29,7 +29,7 @@ public class CalculationServiceController {
 
 	protected final static Logger log = LoggerFactory.getLogger(CalculationServiceController.class);
 
-	@RequestMapping(value = "/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/v1/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
 	public CompoundInterestResponse computeCompoundInterest(@RequestBody CompoundInterestRequest request) {
 
 		log.debug("Calling JSON service computeCompoundInterest");

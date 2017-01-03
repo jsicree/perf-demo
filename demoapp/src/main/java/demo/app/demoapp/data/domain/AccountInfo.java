@@ -2,7 +2,7 @@ package demo.app.demoapp.data.domain;
 
 public class AccountInfo {
 	private String identifier;
-	private Double balance;
+	private Money balance;
 	private Double rate;
 	
 	public AccountInfo() {
@@ -10,7 +10,7 @@ public class AccountInfo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AccountInfo(String identifier, Double balance, Double rate) {
+	public AccountInfo(String identifier, Money balance, Double rate) {
 		super();
 		this.identifier = identifier;
 		this.balance = balance;
@@ -25,11 +25,11 @@ public class AccountInfo {
 		this.identifier = identifier;
 	}
 
-	public Double getBalance() {
+	public Money getBalance() {
 		return balance;
 	}
 
-	public void setBalance(Double balance) {
+	public void setBalance(Money balance) {
 		this.balance = balance;
 	}
 
