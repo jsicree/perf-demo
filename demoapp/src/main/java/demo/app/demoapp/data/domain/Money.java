@@ -5,6 +5,7 @@ import java.util.Locale;
 
 public class Money {
 	private Double value;
+	private Currency currency;
 	
 	private static final NumberFormat FORMATTER = NumberFormat.getCurrencyInstance(Locale.US);
 
@@ -16,8 +17,15 @@ public class Money {
 	public Money(Double value) {
 		super();
 		this.value = value;
+		this.currency = Currency.USD;
 	}
 
+	public Money(Double value, Currency ccy) {
+		super();
+		this.value = value;
+		this.currency = ccy;
+	}
+	
 	public Double getValue() {
 		return value;
 	}
@@ -25,12 +33,18 @@ public class Money {
 	public void setValue(Double value) {
 		this.value = value;
 	}
+	
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
 
 	@Override
 	public String toString() {
-		return FORMATTER.format(value);
+		return "Money [value=" + FORMATTER.format(value) + ", currency=" + currency + "]";
 	}
-	
-	
 	
 }

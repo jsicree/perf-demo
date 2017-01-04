@@ -14,12 +14,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 import demo.app.demoapp.AppConfig;
-import demo.app.demoapp.data.domain.Account;
 import demo.app.demoapp.data.domain.AccountInfo;
-import demo.app.demoapp.data.domain.AccountStatus;
-import demo.app.demoapp.data.domain.AccountType;
 import demo.app.demoapp.data.domain.Frequency;
 import demo.app.demoapp.data.domain.InterestResult;
+import demo.app.demoapp.data.domain.Money;
 import demo.app.demoapp.services.CalculationService;
 import demo.app.demoapp.services.ServiceException;
 
@@ -31,13 +29,13 @@ public class CalculationServiceTest {
 	private static AbstractApplicationContext context;
 
 	private static final AccountInfo[] YEARLY_ACCOUNT_ARRAY = { 
-			new AccountInfo("XYZ-001", new Double(5300.40), new Double(0.0200)), 	
-			new AccountInfo("ABC-392", new Double(10500.00), new Double(0.0200)) 	
+			new AccountInfo("XYZ-001", new Money(5300.40), new Double(0.0200)), 	
+			new AccountInfo("ABC-392", new Money(10500.00), new Double(0.0200)) 	
 	};
 	
 	private static final AccountInfo[] MONTHLY_ACCOUNT_ARRAY = { 
-			new AccountInfo("XYZ-001", new Double(5300.40), new Double(0.0020)), 	
-			new AccountInfo("ABC-392", new Double(10500.00), new Double(0.0020)) 	
+			new AccountInfo("XYZ-001", new Money(5300.40), new Double(0.0020)), 	
+			new AccountInfo("ABC-392", new Money(10500.00), new Double(0.0020)) 	
 	};
 	
 	@BeforeClass
