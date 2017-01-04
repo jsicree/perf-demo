@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +46,21 @@ public class CalculationServiceImpl implements CalculationService {
 		return resultList;
 	}
 
+	public Future<List<InterestResult>> calculateCompoundInterestAsync(final List<AccountInfo> accounts, final Date startDate,
+			final Integer intervals, final Frequency freq, final Boolean includeBreakdowns) throws ServiceException {
+		Long startTime = System.currentTimeMillis();
+		Future<List<InterestResult>> resultList = null;
+
+		ArrayList<Date> intervalList = createIntervals(startDate, intervals, freq);
+
+		log.info("[PERF] num_accounts, intervals, frequency, elapsed_time_ms: " + accounts.size() + ", " + 
+				intervals + ", " + 
+				freq + ", " +				
+				(System.currentTimeMillis() - startTime));
+		return resultList;
+	}
+	
+	
 	private InterestResult computeInterest(final AccountInfo a, final Date startDate,
 			final Integer intervals, final ArrayList<Date> intervalList, final Frequency freq, final Boolean includeBreakdowns) {
 		InterestResult result = new InterestResult();
