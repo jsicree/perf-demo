@@ -23,6 +23,7 @@ phases:
 artifacts:
   files:
     - demoweb/target/demoweb.war
+    - move-war.sh
   discard-paths: yes
     
     
