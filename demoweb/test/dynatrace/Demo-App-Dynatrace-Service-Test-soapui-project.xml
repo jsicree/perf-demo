@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="2e029462-f326-4f16-98ed-682c5fde7954" activeEnvironment="Default" name="Demo App Service Test" resourceRoot="" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="e80572df-d01c-4e6b-a6c8-4d18015757b7" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8080" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:8080</con:endpoint></con:endpoints><con:resource name="getAllBands" path="/demoweb/service/getAllBands" id="25dc85cd-fc06-4afd-921f-f9feaf9f9777"><con:settings/><con:parameters/><con:method name="Method 1" id="b3f433fb-2e54-40b1-a5af-c5f656d463fe" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html;charset=UTF-8</con:mediaType><con:status>403</con:status><con:params/><con:element>html</con:element></con:representation><con:request name="Request 1" id="04bd4d5d-0210-49a9-abeb-70f418766b82" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:originalUri>http://localhost/demoweb/service/getAllBands</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="getAllAccounts" path="/demoweb/service/getAllAccounts" id="25dc85cd-fc06-4afd-921f-f9feaf9f9777"><con:settings/><con:parameters/><con:method name="Method 1" id="b3f433fb-2e54-40b1-a5af-c5f656d463fe" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="Request 1" id="04bd4d5d-0210-49a9-abeb-70f418766b82" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:originalUri>http://localhost/demoweb/service/getAllBands</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="computeCompoundInterest" path="/demoweb/calculate/computeCompoundInterest" id="e4f23094-02e2-4d37-9550-dd297767447a"><con:settings/><con:parameters/><con:method name="Method 1" id="3e3f4e9b-8670-40b6-b436-e0d3127a69e1" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:com="http://localhost/demoweb/calculate/computeCompoundInterest">com:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="65ca486e-50f7-43ba-a3f3-749bdf245182" mediaType="application/json"><con:settings/><con:endpoint>http://localhost:8090</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="dbc3c5d9-8eac-4f19-946c-639427e920c6" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8020" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:8020</con:endpoint></con:endpoints><con:resource name="Testruns" path="/api/v1/profiles/DemoApp/testruns" id="c9f997c2-2ea3-401a-b2b9-79de08be3c40"><con:settings/><con:parameters/><con:method name="JSON" id="9e49cdf5-1ae2-47d1-9fd0-ac0dbe50071a" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/xml</con:mediaType><con:params/><con:element>testRun</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/xml</con:mediaType><con:status>500 404</con:status><con:params/><con:element>error</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>200</con:status><con:params/><con:element>testRuns</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=ISO-8859-1</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:xht="http://www.w3.org/1999/xhtml">xht:html</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/><con:element>testRun</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>201 200</con:status><con:params/><con:element xmlns:tes="https://localhost/api/v1/profiles/DemoApp/testruns">tes:Response</con:element></con:representation><con:request name="JSON Request - testRun" id="9f24088c-df0b-4b75-9e12-29f515e44698" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:8021</con:endpoint><con:request>{
+  "versionbuild": "string",
+  "versionmajor": "string",
+  "versionmilestone": "string",
+  "versionminor": "string",
+  "versionrevision": "string",
+  "marker": "string",
+  "platform": "string",
+  "category": "webapi",
+  "additionalmetadata": {}
+}</con:request><con:originalUri>https://localhost/api/v1/profiles/DemoApp/testruns</con:originalUri><con:credentials><con:username>admin</con:username><con:password>admin</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:interface xsi:type="con:RestService" id="75f5f7c2-eb88-4b70-a845-1b18995d650e" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8020" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:8020</con:endpoint></con:endpoints><con:resource name="Testruns" path="/rest/management/profiles/DemoApp/testruns" id="1bfcd720-7025-441b-84a3-73e21acaa8bc"><con:settings/><con:parameters/><con:method name="HTTP" id="0ceada40-7f8d-4dcc-9c55-7b92b3797993" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/xml</con:mediaType><con:params/><con:element>testRun</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=ISO-8859-1</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:xht="http://www.w3.org/1999/xhtml">xht:html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>200 201</con:status><con:params/><con:element>testRuns</con:element></con:representation><con:request name="HTTP XML Request - testRun" id="2e23c773-4f3f-45f1-9b6a-3b9e28fb354d" mediaType="application/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8020</con:endpoint><con:request>&lt;testRun category="webapi" platform="Windows" versionMajor="6" versionMinor="5" versionRevision="6" versionBuild="1013" /></con:request><con:originalUri>https://localhost/rest/management/profiles/DemoApp/testruns</con:originalUri><con:credentials><con:username>admin</con:username><con:password>admin</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="HTTPS" id="57dd1741-59b6-4a7a-b4ac-c3aca60f8e61" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>200 201</con:status><con:params/><con:element>testRuns</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>500</con:status><con:params/><con:element xmlns:tes="https://localhost/rest/management/profiles/DemoApp/testruns">tes:Fault</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/xml</con:mediaType><con:params/><con:element>testRun</con:element></con:representation><con:request name="HTTPS XML Request - testRun" id="45655414-f02e-4cf8-a863-347a2056edb7" mediaType="application/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:8021</con:endpoint><con:request>&lt;testRun category="webapi" platform="Windows" versionMajor="6" versionMinor="5" versionRevision="6" versionBuild="1013" /></con:request><con:originalUri>https://localhost/rest/management/profiles/DemoApp/testruns</con:originalUri><con:credentials><con:username>admin</con:username><con:password>admin</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="753f4a51-a187-4f1a-bdf0-f583524c2047" name="Dynatrace Setup (disable if use Jenkins)" disabled="true"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="3a76887b-e68f-43d7-82a8-52cfd3c5d574" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Create New TestRun ID" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Read Me" id="993b5567-18fc-41a5-a675-07721e97b727"><con:settings/><con:config><script>/*
+ * In order for API calls to be registered with Dynatrace (DT)
+ * a RunID must be established by calling a DT api
+ * this can be done in soapUI by a REST call or by using Jenkins
+ * DT plug in.
+ * 
+ * If using Jenkins, then disable this REST call
+ * There are both http and https options for rest calls.  request body
+ * can be JSON or XML.  Both examples have been provided, but
+ * only one is required
+ * 
+ * Also, the header of each API call must be updated with the 
+ * x-dynatrace key pair.  Copy this script to the "setup" script 
+ * of each test Suite to be instrumented by DT
+ 
+import com.eviware.soapui.impl.wsdl.teststeps.*
+import com.eviware.soapui.support.types.StringToStringsMap
+
+log.info("Setting Dynatrace headers")
+log.info("testRunId=" + testSuite.project.getPropertyValue("testRunID"))
+
+for( testCase in testSuite.getTestCaseList() ) {
+    for( testStep in testCase.getTestStepList() ) {
+		if( testStep instanceof RestTestRequestStep || testStep instanceof HttpTestRequestStep ) {
+			def headers = new StringToStringsMap()
+			headers.put("X-dynaTrace","NA=" + testStep.getLabel() + ";TR=" + testSuite.project.getPropertyValue("testRunID") + ";RC=200") 
+			log.info("Setting HTTP headers ${headers} in test step ${testStep.getLabel()} in test case ${testCase.getLabel()}")
+			testStep.getTestRequest().setRequestHeaders(headers)
+		}
+	}
+}
+
+
+ */</script></con:config></con:testStep><con:testStep type="restrequest" name="Create New TestRun ID" id="2c6cd110-813b-41e7-83fc-3936c28fa10c"><con:settings/><con:config service="http://localhost:8020" resourcePath="/rest/management/profiles/DemoApp/testruns" methodName="HTTPS" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request" id="2e23c773-4f3f-45f1-9b6a-3b9e28fb354d" mediaType="application/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://localhost:8021</con:endpoint><con:request>&lt;testRun category="webapi" platform="Windows" versionMajor="1" versionMinor="0" versionRevision="0" versionBuild="1" /></con:request><con:originalUri>https://localhost/rest/management/profiles/DemoApp/testruns</con:originalUri><con:credentials><con:username>admin</con:username><con:password>admin</con:password><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="transfer" name="Copy TestRun id Test Suite Property" id="2753443c-4bac-4a2b-b050-4424a32555e2"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>TestRunID</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>Create New TestRun ID</con:sourceStep><con:sourcePath>//@id</con:sourcePath><con:targetType>testRunID</con:targetType><con:targetStep>#Project#</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="797c11f1-f2f7-4898-969a-dd4c12ee7c4b" name="DemoTestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="cbcdef6e-15f1-4234-8bd6-ceff0168ea5f" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getAllBands" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="httprequest" name="getAllBands" id="842c522a-0504-493b-b85e-046eaa736d7d"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" id="660ff583-b4ae-4441-9f25-a1f3b293ba57" name="getAllBands" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-dynaTrace" value="NA=getAllBands;TR=c0f5ccc1-7fdc-414c-b71c-7ba3bea91dff;RC=200" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8090/demoweb/service/getAllBands</con:endpoint><con:request/><con:assertion type="Simple Contains" id="273b6e59-5419-451a-86f2-1897770cc387" name="ContainsNameRush"><con:configuration><token>Rush</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties><con:property><con:name>testRunID</con:name><con:value>7997d179-fb38-4151-98f7-01709851f415</con:value></con:property></con:properties></con:testCase><con:testCase id="d24287be-4fff-4d76-922b-687ed8716a37" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getAllAccounts" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="httprequest" name="getAllAccounts" id="d3cc69d4-9954-43c6-8914-087d45e35dea"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" id="78a95c2e-60a2-45ee-8cbf-a897c2759f57" name="getAllAccounts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-dynaTrace" value="NA=getAllAccounts;TR=c0f5ccc1-7fdc-414c-b71c-7ba3bea91dff;RC=200" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8090/demoweb/service/getAllAccounts</con:endpoint><con:request/><con:assertion type="Simple Contains" id="44072cbb-f2ba-4406-a35f-835f43dd7990" name="Contains"><con:configuration><token>XYZ-001</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:properties><con:property><con:name>testRunID</con:name><con:value>7997d179-fb38-4151-98f7-01709851f415</con:value></con:property></con:properties></con:testCase><con:testCase id="69822c2d-9b25-411a-9458-485f2d324dbc" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="computeCompondInterest" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="restrequest" name="monthly_3_acct_no_breakdowns" id="f8576f51-8ac8-4839-9ada-6b7dda8f9e7a"><con:settings/><con:config service="http://localhost:8080" resourcePath="/demoweb/calculate/computeCompoundInterest" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="computeCompoundInterest - monthly_3_acct_no_breakdowns" id="65ca486e-50f7-43ba-a3f3-749bdf245182" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-dynaTrace" value="NA=monthly_3_acct_no_breakdowns;TR=c0f5ccc1-7fdc-414c-b71c-7ba3bea91dff;RC=200" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8090</con:endpoint><con:request>{
+	"accounts": [
+		{	"identifier": "ACCOUNT-001",
+			"balance": "12000",
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-002",
+			"balance": "10500.00",
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-003",
+			"balance": "15275.00",
+			"rate": "0.0180" 
+		} 			
+	],
+	"startDate": "2017-12-21T06:00:00.000Z",	
+	"intervals": "60",
+	"frequency": "MONTHLY",
+	"includeBreakdowns": "false"	
+}
+
+</con:request><con:originalUri>http://localhost/demoweb/calculate/computeCompoundInterest</con:originalUri><con:assertion type="Simple Contains" id="ffee4327-c02a-41ca-b1c8-ffcdb6448c32" name="Contains"><con:configuration><token>ACCOUNT-001</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="monthly_3_acct_w_breakdowns" id="848456ab-e7c7-4d8e-a4a7-567fe41ae6ad"><con:settings/><con:config service="http://localhost:8080" resourcePath="/demoweb/calculate/computeCompoundInterest" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="computeCompoundInterest - monthly_3_acct_w_breakdowns" id="65ca486e-50f7-43ba-a3f3-749bdf245182" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-dynaTrace" value="NA=monthly_3_acct_w_breakdowns;TR=c0f5ccc1-7fdc-414c-b71c-7ba3bea91dff;RC=200" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8090</con:endpoint><con:request>{
+	"accounts": [
+		{	"identifier": "ACCOUNT-001",
+			"balance": "12000",
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-002",
+			"balance": "10500.00",
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-003",
+			"balance": "15275.00",
+			"rate": "0.0180" 
+		} 			
+	],
+	"startDate": "2017-12-21T06:00:00.000Z",	
+	"intervals": "60",
+	"frequency": "MONTHLY",
+	"includeBreakdowns": "true"	
+}
+
+</con:request><con:originalUri>http://localhost/demoweb/calculate/computeCompoundInterest</con:originalUri><con:assertion type="Simple Contains" id="2922bcb3-a551-474d-a8d3-6c35e94d22dd" name="Contains"><con:configuration><token>ACCOUNT-001</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="yearly_3_acct_no_breakdowns" id="209d60cf-4a83-4801-9362-afe51f027885"><con:settings/><con:config service="http://localhost:8080" resourcePath="/demoweb/calculate/computeCompoundInterest" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="computeCompoundInterest - yearly_3_acct_no_breakdowns" id="65ca486e-50f7-43ba-a3f3-749bdf245182" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-dynaTrace" value="NA=yearly_3_acct_no_breakdowns;TR=c0f5ccc1-7fdc-414c-b71c-7ba3bea91dff;RC=200" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8090</con:endpoint><con:request>{
+	"accounts": [
+		{	"identifier": "ACCOUNT-001",
+			"balance": "12000",
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-002",
+			"balance": "10500.00",
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-003",
+			"balance": "15275.00",
+			"rate": "0.0180" 
+		} 			
+	],
+	"startDate": "2017-12-21T06:00:00.000Z",	
+	"intervals": "5",
+	"frequency": "YEARLY",
+	"includeBreakdowns": "false"	
+}
+
+</con:request><con:originalUri>http://localhost/demoweb/calculate/computeCompoundInterest</con:originalUri><con:assertion type="Simple Contains" id="e0f2a4bb-3eee-4504-bfaf-4d16cabbc835" name="Contains"><con:configuration><token>ACCOUNT-001</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="yearly_3_acct_w_breakdowns" id="2c2a9a72-755d-483a-ab2a-cc966c29e004"><con:settings/><con:config service="http://localhost:8080" resourcePath="/demoweb/calculate/computeCompoundInterest" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="computeCompoundInterest - yearly_3_acct_w_breakdowns" id="65ca486e-50f7-43ba-a3f3-749bdf245182" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="X-dynaTrace" value="NA=yearly_3_acct_w_breakdowns;TR=c0f5ccc1-7fdc-414c-b71c-7ba3bea91dff;RC=200" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8090</con:endpoint><con:request>{
+	"accounts": [
+		{	"identifier": "ACCOUNT-001",
+			"balance": "12000",
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-002",
+			"balance": "10500.00",
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-003",
+			"balance": "15275.00",
+			"rate": "0.0180" 
+		} 			
+	],
+	"startDate": "2017-12-21T06:00:00.000Z",	
+	"intervals": "5",
+	"frequency": "YEARLY",
+	"includeBreakdowns": "true"	
+}
+
+</con:request><con:originalUri>http://localhost/demoweb/calculate/computeCompoundInterest</con:originalUri><con:assertion type="Simple Contains" id="46b000ca-4af6-4264-abd9-33ba74dd81ce" name="Contains"><con:configuration><token>ACCOUNT-001</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>testRunID</con:name><con:value>7997d179-fb38-4151-98f7-01709851f415</con:value></con:property></con:properties></con:testCase><con:properties/><con:setupScript>import com.eviware.soapui.impl.wsdl.teststeps.*
+import com.eviware.soapui.support.types.StringToStringsMap
+
+log.info("Setting Dynatrace headers")
+log.info("testRunId=" + testSuite.project.getPropertyValue("testRunID"))
+
+for( testCase in testSuite.getTestCaseList() ) {
+    for( testStep in testCase.getTestStepList() ) {
+		if( testStep instanceof RestTestRequestStep || testStep instanceof HttpTestRequestStep ) {
+			def headers = new StringToStringsMap()
+			headers.put("X-dynaTrace","NA=" + testStep.getLabel() + ";TR=" + testSuite.project.getPropertyValue("testRunID") + ";RC=200") 
+			log.info("Setting HTTP headers ${headers} in test step ${testStep.getLabel()} in test case ${testCase.getLabel()}")
+			testStep.getTestRequest().setRequestHeaders(headers)
+		}
+	}
+}
+
+</con:setupScript></con:testSuite><con:properties><con:property><con:name>testRunID</con:name><con:value>c0f5ccc1-7fdc-414c-b71c-7ba3bea91dff</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:beforeRunScript/><con:sensitiveInformation/></con:soapui-project>
