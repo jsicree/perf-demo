@@ -2,6 +2,7 @@ package demo.app.demoapp;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import demo.app.demoapp.services.AccountService;
 import demo.app.demoapp.services.CalculationService;
@@ -9,6 +10,7 @@ import demo.app.demoapp.services.impl.AccountServiceSimpleImpl;
 import demo.app.demoapp.services.impl.CalculationServiceImpl;
 
 @Configuration
+@EnableAsync
 public class AppConfig {
 
 	public AppConfig() {

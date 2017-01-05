@@ -11,6 +11,7 @@ import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import demo.app.demoapp.data.domain.AccountInfo;
@@ -46,6 +47,7 @@ public class CalculationServiceImpl implements CalculationService {
 		return resultList;
 	}
 
+	@Async
 	public Future<List<InterestResult>> calculateCompoundInterestAsync(final List<AccountInfo> accounts, final Date startDate,
 			final Integer intervals, final Frequency freq, final Boolean includeBreakdowns) throws ServiceException {
 		Long startTime = System.currentTimeMillis();
