@@ -44,7 +44,8 @@ public class Money {
 
 	@Override
 	public String toString() {
-		return "Money [value=" + FORMATTER.format(value) + ", currency=" + currency + "]";
+		return "Money [value=" + value + ", currency=" + currency + "]";
+//		return "Money [value=" + FORMATTER.format(value) + ", currency=" + currency + "]";
 	}
 	
 }
