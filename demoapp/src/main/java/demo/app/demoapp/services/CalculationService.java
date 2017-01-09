@@ -13,6 +13,6 @@ public interface CalculationService {
 	public List<InterestResult> calculateCompoundInterest(final List<AccountInfo> accounts, final Date startDate,
 			final Integer intervals, final Frequency freq, final Boolean includeBreakdowns) throws ServiceException;
 
-	public Future<List<InterestResult>> calculateCompoundInterestAsync(final List<AccountInfo> accounts, final Date startDate,
+	public List<InterestResult> calculateCompoundInterestAsync(final List<AccountInfo> accounts, final Date startDate,
 			final Integer intervals, final Frequency freq, final Boolean includeBreakdowns) throws ServiceException;	
 }

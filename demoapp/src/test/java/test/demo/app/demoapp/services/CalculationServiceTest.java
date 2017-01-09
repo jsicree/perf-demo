@@ -28,14 +28,14 @@ public class CalculationServiceTest {
 	private static CalculationService calcService;
 	private static AbstractApplicationContext context;
 
-	private static final AccountInfo[] YEARLY_ACCOUNT_ARRAY = { 
-			new AccountInfo("XYZ-001", new Money(5300.40), new Double(0.0200)), 	
-			new AccountInfo("ABC-392", new Money(10500.00), new Double(0.0200)) 	
+	private AccountInfo[] YEARLY_ACCOUNT_ARRAY = { 
+			new AccountInfo("XYZ-001", new Money(new Double("5300.40")), new Double(0.0200)), 	
+			new AccountInfo("ABC-392", new Money(new Double("10500.00")), new Double(0.0200)) 	
 	};
 	
-	private static final AccountInfo[] MONTHLY_ACCOUNT_ARRAY = { 
-			new AccountInfo("XYZ-001", new Money(5300.40), new Double(0.0020)), 	
-			new AccountInfo("ABC-392", new Money(10500.00), new Double(0.0020)) 	
+	private AccountInfo[] MONTHLY_ACCOUNT_ARRAY = { 
+			new AccountInfo("XYZ-001", new Money(new Double("5300.40")), new Double(0.0020)), 	
+			new AccountInfo("ABC-392", new Money(new Double("10500.00")), new Double(0.0020)) 	
 	};
 	
 	@BeforeClass
@@ -59,6 +59,7 @@ public class CalculationServiceTest {
 		List<AccountInfo> accountList = new ArrayList<AccountInfo>();
 		
 		for (AccountInfo a : YEARLY_ACCOUNT_ARRAY) {
+			log.info("Adding account " + a);
 			accountList.add(a);			
 		}
 
@@ -97,6 +98,7 @@ public class CalculationServiceTest {
 		List<AccountInfo> accountList = new ArrayList<AccountInfo>();
 		
 		for (AccountInfo a : MONTHLY_ACCOUNT_ARRAY) {
+			log.info("Adding account " + a.getIdentifier() + ", " + a.getBalance().getValue());
 			accountList.add(a);			
 		}
 
@@ -111,6 +113,84 @@ public class CalculationServiceTest {
 		
 		try {
 			results = calcService.calculateCompoundInterest(accountList, startDate, intervals, freq, false);
+			if (results != null) {
+				for (InterestResult ir : results) {
+					log.info(ir.toString());					
+				}
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		
+		log.info("<< Leaving testCompoundInterestMonthlyCalculation.");
+	}
+
+	
+	@Test
+	public void testCompoundInterestYearlyCalculationAsync() {
+
+		log.info(">> Entering testCompoundInterestYearlyCalculationAsync");
+		List<InterestResult> results = new ArrayList<InterestResult>();
+
+		Integer intervals = 10;
+		Frequency freq = Frequency.YEARLY;
+		String startDateStr = "05-27-2017";
+		
+		List<AccountInfo> accountList = new ArrayList<AccountInfo>();
+		
+		for (AccountInfo a : YEARLY_ACCOUNT_ARRAY) {
+			accountList.add(a);			
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+		Date startDate = null;
+		try {
+			startDate = sdf.parse(startDateStr);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			results = calcService.calculateCompoundInterestAsync(accountList, startDate, intervals , freq, false);
+			if (results != null) {
+				for (InterestResult ir : results) {
+					log.info(ir.toString());					
+				}
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		
+		log.info("<< Leaving testCompoundInterestYearlyCalculation.");
+	}
+
+	@Test
+	public void testCompoundInterestMonthlyCalculationAsync() {
+
+		log.info(">> Entering testCompoundInterestMonthlyCalculationAsync");
+		List<InterestResult> results = new ArrayList<InterestResult>();
+
+		Integer intervals = 120;
+		Frequency freq = Frequency.MONTHLY;
+		String startDateStr = "05-27-2017";
+
+		List<AccountInfo> accountList = new ArrayList<AccountInfo>();
+		
+		for (AccountInfo a : MONTHLY_ACCOUNT_ARRAY) {
+			accountList.add(a);			
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+		Date startDate = null;
+
+		try {
+			startDate = sdf.parse(startDateStr);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			results = calcService.calculateCompoundInterestAsync(accountList, startDate, intervals, freq, false);
 			if (results != null) {
 				for (InterestResult ir : results) {
 					log.info(ir.toString());					
