@@ -7,11 +7,17 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.AsyncResult;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
+import demo.app.demoapp.callable.CompoundInterestTask;
 import demo.app.demoapp.data.domain.AccountInfo;
 import demo.app.demoapp.data.domain.Frequency;
 import demo.app.demoapp.data.domain.InterestResult;
@@ -23,6 +29,9 @@ import demo.app.demoapp.services.ServiceException;
 public class CalculationServiceImpl implements CalculationService {
 
 	protected final static Logger log = LoggerFactory.getLogger(CalculationServiceImpl.class);
+
+	@Autowired
+	protected ThreadPoolTaskExecutor taskExecutor;
 
 	public CalculationServiceImpl() {
 		// TODO Auto-generated constructor stub
@@ -36,17 +45,62 @@ public class CalculationServiceImpl implements CalculationService {
 		ArrayList<Date> intervalList = createIntervals(startDate, intervals, freq);
 
 		for (AccountInfo a : accounts) {
+			log.info("Computing the compound interest for account " + a.getIdentifier());
 			resultList.add(computeInterest(a, startDate, intervals, intervalList, freq, includeBreakdowns));
 		}
-		log.info("[PERF] num_accounts, intervals, frequency, elapsed_time_ms: " + accounts.size() + ", " + 
-				intervals + ", " + 
-				freq + ", " +				
-				(System.currentTimeMillis() - startTime));
+		log.info("[PERF] num_accounts, intervals, frequency, elapsed_time_ms: " + accounts.size() + ", " + intervals
+				+ ", " + freq + ", " + (System.currentTimeMillis() - startTime));
 		return resultList;
 	}
 
-	private InterestResult computeInterest(final AccountInfo a, final Date startDate,
-			final Integer intervals, final ArrayList<Date> intervalList, final Frequency freq, final Boolean includeBreakdowns) {
+	public List<InterestResult> calculateCompoundInterestAsync(final List<AccountInfo> accounts, final Date startDate,
+			final Integer intervals, final Frequency freq, final Boolean includeBreakdowns) throws ServiceException {
+		Long startTime = System.currentTimeMillis();
+		List<InterestResult> resultList = new ArrayList<InterestResult>();
+
+//		log.info("TaskExecutor corePoolSize: " + taskExecutor.getCorePoolSize());
+//		log.info("TaskExecutor maxPoolSize: " + taskExecutor.getMaxPoolSize());
+//		log.info("TaskExecutor poolSize: " + taskExecutor.getPoolSize());
+//		log.info("TaskExecutor threadNamePrefix: " + taskExecutor.getThreadNamePrefix());
+
+		ArrayList<Date> intervalList = createIntervals(startDate, intervals, freq);
+
+		ArrayList<CompoundInterestTask> taskList = new ArrayList<CompoundInterestTask>();
+
+		try {
+			for (AccountInfo a : accounts) {
+				log.info("Creating compound interest task for account " + a.getIdentifier());
+				taskList.add(new CompoundInterestTask(a, startDate, intervals, intervalList, freq, includeBreakdowns));
+			}
+
+			try {
+				log.info("Calling invokeAll to execute all tasks.");
+				List<Future<InterestResult>> asyncResult = taskExecutor.getThreadPoolExecutor().invokeAll(taskList);
+				for (Future<InterestResult> result : asyncResult) {
+					if (result.isDone()) {
+						resultList.add(result.get());
+					}
+				}
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		log.info("[PERF] num_accounts, intervals, frequency, elapsed_time_ms: " + accounts.size() + ", " + intervals
+				+ ", " + freq + ", " + (System.currentTimeMillis() - startTime));
+		return resultList;
+	}
+
+	private InterestResult computeInterest(final AccountInfo a, final Date startDate, final Integer intervals,
+			final ArrayList<Date> intervalList, final Frequency freq, final Boolean includeBreakdowns) {
 		InterestResult result = new InterestResult();
 		result.setAccountIdentifier(a.getIdentifier());
 		result.setStartDate(startDate);
@@ -56,16 +110,15 @@ public class CalculationServiceImpl implements CalculationService {
 		result.setInterestRate(a.getRate());
 
 		Map<Date, Money> res = new HashMap<Date, Money>();
-		Money currentBalance = a.getBalance();
+		Double currentBalance = a.getBalance().getValue();
 		res.put(startDate, a.getBalance());
 
 		for (Date d : intervalList) {
-			Double interest = currentBalance.getValue() * a.getRate();
-			currentBalance.setValue(currentBalance.getValue() + interest);
-			res.put(d, currentBalance);
-			result.setEndBalance(currentBalance);
-			long delay = new Double(Math.random() * 50).longValue(); 
-			//log.info("Delay (ms): " + delay);
+			Double interest = currentBalance * a.getRate();
+			currentBalance += interest;
+			res.put(d, new Money(currentBalance));
+			long delay = new Double(Math.random() * 50).longValue();
+			// log.info("Delay (ms): " + delay);
 			try {
 				Thread.sleep(delay);
 			} catch (InterruptedException e) {
@@ -73,15 +126,60 @@ public class CalculationServiceImpl implements CalculationService {
 				e.printStackTrace();
 			}
 		}
+		result.setEndBalance(new Money(currentBalance));
 		if (includeBreakdowns) {
-			result.setResults(res);			
+			result.setResults(res);
 		} else {
 			result.setResults(null);
 		}
-		
 		return result;
 
 	}
+
+	// @Async
+	// private Future<InterestResult> computeInterestAsync(final AccountInfo a,
+	// final Date startDate,
+	// final Integer intervals, final ArrayList<Date> intervalList, final
+	// Frequency freq, final Boolean includeBreakdowns) {
+	//
+	// Map<Date, Money> res = new HashMap<Date, Money>();
+	// Money currentBalance = a.getBalance();
+	// res.put(startDate, a.getBalance());
+	// for (Date d : intervalList) {
+	// Double interest = currentBalance.getValue() * a.getRate();
+	// currentBalance.setValue(currentBalance.getValue() + interest);
+	// res.put(d, currentBalance);
+	// long delay = new Double(Math.random() * 50).longValue();
+	// //log.info("Delay (ms): " + delay);
+	// try {
+	// Thread.sleep(delay);
+	// } catch (InterruptedException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
+	//
+	// InterestResult result = new InterestResult();
+	// result.setAccountIdentifier(a.getIdentifier());
+	// result.setStartDate(startDate);
+	// result.setIntervals(intervals);
+	// result.setStartBalance(a.getBalance());
+	// result.setEndBalance(currentBalance);
+	// result.setFrequency(freq);
+	// result.setInterestRate(a.getRate());
+	//
+	// if (includeBreakdowns) {
+	// result.setResults(res);
+	// } else {
+	// result.setResults(null);
+	// }
+	//
+	// AsyncResult<InterestResult> asyncResult = new
+	// AsyncResult<InterestResult>(result);
+	//
+	// return asyncResult;
+	//
+	// }
 
 	private ArrayList<Date> createIntervals(final Date startDate, final Integer intervals, final Frequency freq) {
 		ArrayList<Date> result = new ArrayList<Date>();
