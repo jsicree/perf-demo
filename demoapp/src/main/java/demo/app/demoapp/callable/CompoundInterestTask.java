@@ -19,13 +19,14 @@ public class CompoundInterestTask implements Callable<InterestResult> {
 	private ArrayList<Date> intervalList;
 	private Frequency freq;
 	private Boolean includeBreakdowns;
+	private Integer computeDelay;
 	
 	public CompoundInterestTask() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public CompoundInterestTask(AccountInfo a, Date startDate, Integer intervals, ArrayList<Date> intervalList,
-			Frequency freq, Boolean includeBreakdowns) {
+			Frequency freq, Boolean includeBreakdowns, Integer computeDelay) {
 		super();
 		this.a = a;
 		this.startDate = startDate;
@@ -33,6 +34,7 @@ public class CompoundInterestTask implements Callable<InterestResult> {
 		this.intervalList = intervalList;
 		this.freq = freq;
 		this.includeBreakdowns = includeBreakdowns;
+		this.computeDelay = computeDelay;
 	}
 
 
@@ -54,7 +56,7 @@ public class CompoundInterestTask implements Callable<InterestResult> {
 			Double interest = currentBalance * a.getRate();
 			currentBalance += interest;
 			res.put(d, new Money(currentBalance));
-			long delay = new Double(Math.random() * 50).longValue();
+			long delay = new Double(Math.random() * computeDelay).longValue();
 			// log.info("Delay (ms): " + delay);
 			try {
 				Thread.sleep(delay);
