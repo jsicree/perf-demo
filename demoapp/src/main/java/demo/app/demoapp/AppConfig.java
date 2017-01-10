@@ -11,8 +11,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import demo.app.demoapp.services.AccountService;
 import demo.app.demoapp.services.CalculationService;
+import demo.app.demoapp.services.MemoryService;
 import demo.app.demoapp.services.impl.AccountServiceSimpleImpl;
 import demo.app.demoapp.services.impl.CalculationServiceImpl;
+import demo.app.demoapp.services.impl.MemoryServiceImpl;
 
 @Configuration
 @EnableAsync
@@ -40,6 +42,11 @@ public class AppConfig {
 	@Bean
 	public CalculationService calculationService() {
 		return new CalculationServiceImpl(Integer.parseInt(environment.getRequiredProperty(PROPERTY_NAME_COMPUTE_COMPOUND_INTEREST_DELAY_MS)));
+	}
+
+	@Bean
+	public MemoryService memoryService() {
+		return new MemoryServiceImpl();
 	}
 	
 	@Bean
