@@ -12,7 +12,8 @@ import demo.app.demoapp.services.ServiceException;
 public class MemoryServiceImpl implements MemoryService {
 
 	protected final static Logger log = LoggerFactory.getLogger(MemoryServiceImpl.class);
-
+	
+	private final static Map<BadKey, byte[]> leakyMap = new HashMap<BadKey, byte[]>();
 	static class BadKey {
 
 		Integer id;
@@ -29,19 +30,22 @@ public class MemoryServiceImpl implements MemoryService {
 	}
 
 	public MemoryServiceImpl() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public void generateOutOfMemoryViaBadKey(final Integer numIterations, final Integer chunkSize) throws ServiceException {
 
 		log.info("Calling generateOutOfMemoryViaBadKey with numIterations = " + numIterations + ", chunkSize = " + chunkSize);
 
-		log.info("Total/Free Memory: " + Runtime.getRuntime().totalMemory() + " / " + Runtime.getRuntime().freeMemory());
-		
-		Map<BadKey, byte[]> m = new HashMap<BadKey, byte[]>();
+		log.info("Total/Free/Max Memory: " + Runtime.getRuntime().totalMemory() + " / " + Runtime.getRuntime().freeMemory() + " / " + Runtime.getRuntime().maxMemory());
+
+		log.info("Map size before iterations: " + leakyMap.size());
+
 //		while (true)
-			for (int i = 0; i < numIterations; i++)
-				if (!m.containsKey(i))
-					m.put(new BadKey(i), new byte[chunkSize]);
+		for (int i = 0; i < numIterations; i++) {
+			if (!leakyMap.containsKey(i))
+				leakyMap.put(new BadKey(i), new byte[chunkSize]);				
+		}
+		log.info("Map size after iterations: " + leakyMap.size());
+		
 	}
 }
