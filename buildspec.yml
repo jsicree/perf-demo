@@ -11,7 +11,7 @@ phases:
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
-      - mvn -f demoall/pom.xml clean
+      - mvn -X -f demoall/pom.xml clean
   build:
     commands:
       - echo Build started on `date`
