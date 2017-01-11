@@ -1,20 +1,14 @@
 package demo.app.demoweb.mvc.data;
 
-import java.util.Date;
-import java.util.List;
-
-import demo.app.demoapp.data.domain.AccountInfo;
-import demo.app.demoapp.data.domain.Frequency;
-
-public class OutOfMemoryBadKeyRequest {
+public class DataMapRequest {
 	private Integer numIterations;
 	private Integer chunkSize;
 
-	public OutOfMemoryBadKeyRequest() {
+	public DataMapRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public OutOfMemoryBadKeyRequest(Integer numIterations, Integer chunkSize) {
+	public DataMapRequest(Integer numIterations, Integer chunkSize) {
 		super();
 		this.numIterations = numIterations;
 		this.chunkSize = chunkSize;
@@ -34,7 +28,7 @@ public class OutOfMemoryBadKeyRequest {
 	}
 	@Override
 	public String toString() {
-		return "OutOfMemoryBadKeyRequest [numIterations=" + numIterations + ", chunkSize=" + chunkSize + "]";
+		return "DataMapRequest [numIterations=" + numIterations + ", chunkSize=" + chunkSize + "]";
 	}
 
 	
