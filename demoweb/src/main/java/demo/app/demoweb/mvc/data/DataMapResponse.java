@@ -1,15 +1,15 @@
 package demo.app.demoweb.mvc.data;
 
-public class OutOfMemoryBadKeyResponse extends ServiceResponse {
+public class DataMapResponse extends ServiceResponse {
 
-	public OutOfMemoryBadKeyResponse() {
+	public DataMapResponse() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String toString() {
-		return "OutOfMemoryResponse [status=" + getStatus() + ", message=" + getMessage()
+		return "DataMapResponse [status=" + getStatus() + ", message=" + getMessage()
 				+ ", elapsedTimeMs=" + getElapsedTimeMs() + "]";
 	}
 

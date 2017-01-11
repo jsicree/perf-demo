@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import demo.app.demoapp.services.MemoryService;
 import demo.app.demoapp.services.ServiceException;
-import demo.app.demoweb.mvc.data.OutOfMemoryBadKeyRequest;
-import demo.app.demoweb.mvc.data.OutOfMemoryBadKeyResponse;
+import demo.app.demoweb.mvc.data.DataMapRequest;
+import demo.app.demoweb.mvc.data.DataMapResponse;
 import demo.app.demoweb.mvc.data.Status;
 
 /**
@@ -26,13 +26,13 @@ public class MemoryServiceController {
 
 	protected final static Logger log = LoggerFactory.getLogger(MemoryServiceController.class);
 
-	@RequestMapping(value = "/v1/createOutOfMemoryViaBadKey", method = RequestMethod.POST, produces = "application/json")
-	public OutOfMemoryBadKeyResponse createOutOfMemoryViaBadKey(@RequestBody OutOfMemoryBadKeyRequest request) {
+	@RequestMapping(value = "/v1/addDataToMap", method = RequestMethod.POST, produces = "application/json")
+	public DataMapResponse addDataToBadKeyMap(@RequestBody DataMapRequest request) {
 
 		Long startTime = System.currentTimeMillis();
-		log.debug("Calling JSON service createOutOfMemoryViaBadKey (v1)");
+		log.debug("Calling JSON service addDataToMap (v1)");
 
-		OutOfMemoryBadKeyResponse response = new OutOfMemoryBadKeyResponse();
+		DataMapResponse response = new DataMapResponse();
 		if (request != null) {
 			if (request.getNumIterations() != null && 
 					request.getChunkSize() != null)	{
@@ -40,7 +40,7 @@ public class MemoryServiceController {
 				log.debug("ChunkSize: " + request.getChunkSize());
 
 				try {
-					memoryService.generateOutOfMemoryViaBadKey(request.getNumIterations(), request.getChunkSize());
+					memoryService.populateBadKeyMap(request.getNumIterations(), request.getChunkSize());
 
 					response.setStatus(Status.OK);
 					response.setMessage("No out of memory error occurred. You were lucky :) ");
@@ -59,8 +59,84 @@ public class MemoryServiceController {
 				log.debug("The input chunk size is null.");
 			}
 		}
+		return response;
+	}
+
+	
+	@RequestMapping(value = "/v1/clearMap", method = RequestMethod.POST, produces = "application/json")
+	public DataMapResponse clearBadKeyMap() {
+
+		Long startTime = System.currentTimeMillis();
+		log.debug("Calling JSON service clearMap (v1)");
+		DataMapResponse response = new DataMapResponse();
+		try {
+			memoryService.clearBadKeyMap();
+			response.setStatus(Status.OK);
+			response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
+		} catch (ServiceException e) {
+			response.setStatus(Status.ERROR);
+			response.setMessage("An exception occurred: " + e.getLocalizedMessage());
+			response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
+			e.printStackTrace();
+		}
 
 		return response;
 	}
+	
+	@RequestMapping(value = "/v2/addDataToMap", method = RequestMethod.POST, produces = "application/json")
+	public DataMapResponse addDataToGoodKeyMap(@RequestBody DataMapRequest request) {
+
+		Long startTime = System.currentTimeMillis();
+		log.debug("Calling JSON service addDataToMap (v2)");
+
+		DataMapResponse response = new DataMapResponse();
+		if (request != null) {
+			if (request.getNumIterations() != null && 
+					request.getChunkSize() != null)	{
+				log.debug("NumInterations: " + request.getNumIterations());
+				log.debug("ChunkSize: " + request.getChunkSize());
+
+				try {
+					memoryService.populateGoodKeyMap(request.getNumIterations(), request.getChunkSize());
+
+					response.setStatus(Status.OK);
+					response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
+				} catch (ServiceException e) {
+					response.setStatus(Status.ERROR);
+					response.setMessage("An exception occurred: " + e.getLocalizedMessage());
+					response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
+					e.printStackTrace();
+				}
+			} else {
+				response.setStatus(Status.ERROR);
+				response.setMessage("The input chunk size is null.");
+				response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
+				log.debug("The input chunk size is null.");
+			}
+		}
+
+		return response;
+	}
+
+	@RequestMapping(value = "/v2/clearMap", method = RequestMethod.POST, produces = "application/json")
+	public DataMapResponse clearGoodKeyMap() {
+
+		Long startTime = System.currentTimeMillis();
+		log.debug("Calling JSON service clearMap (v2)");
+		DataMapResponse response = new DataMapResponse();
+		try {
+			memoryService.clearGoodKeyMap();
+			response.setStatus(Status.OK);
+			response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
+		} catch (ServiceException e) {
+			response.setStatus(Status.ERROR);
+			response.setMessage("An exception occurred: " + e.getLocalizedMessage());
+			response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
+			e.printStackTrace();
+		}
+
+		return response;
+	}
+	
 	
 }
