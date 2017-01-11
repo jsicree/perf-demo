@@ -32,7 +32,7 @@ public class MemoryServiceTest {
 		log.info(">> Entering testOutOfMemoryViaBadKey");
 
 		try {
-			memoryService.generateOutOfMemoryViaBadKey(new Integer(10000));
+			memoryService.populateBadKeyMap(new Integer(10000), new Integer(10000));
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
