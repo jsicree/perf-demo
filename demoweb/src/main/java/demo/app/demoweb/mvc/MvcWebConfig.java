@@ -2,10 +2,14 @@ package demo.app.demoweb.mvc;
 
 import java.util.Properties;
 
+import javax.annotation.Resource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.validation.Validator;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
@@ -19,8 +23,15 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "demo.app.demoweb.mvc.controller" })
+@PropertySource({ "classpath:demoweb_config.properties" })
 public class MvcWebConfig extends WebMvcConfigurerAdapter {
 
+	private static final String PROPERTY_NAME_CALCULATE_ACTIVE_VERSION = "caclulate.active.version";
+	private static final String PROPERTY_NAME_MEMORY_ACTIVE_VERSION = "memory.active.version";
+
+	@Resource
+	private Environment environment;
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
@@ -36,16 +47,6 @@ public class MvcWebConfig extends WebMvcConfigurerAdapter {
 		return viewResolver;
     }
 	
-//	@Bean
-//	public Validator customerModelValidator() {
-//		return new joe.spring.springweb.mvc.validator.CustomerModelValidator();
-//	}
-//	
-//	@Bean
-//	public Validator loginModelValidator() {
-//		return new joe.spring.springweb.mvc.validator.LoginModelValidator();
-//	}
-
 	@Bean
 	public ReloadableResourceBundleMessageSource messageSource() {
 		ReloadableResourceBundleMessageSource src = new ReloadableResourceBundleMessageSource();
@@ -72,4 +73,14 @@ public class MvcWebConfig extends WebMvcConfigurerAdapter {
 		return bean;
 	}
 
+	@Bean
+	public String calculateActiveVersion() {
+		return environment.getProperty(PROPERTY_NAME_CALCULATE_ACTIVE_VERSION);		
+	}
+
+	@Bean
+	public String memoryActiveVersion() {
+		return environment.getProperty(PROPERTY_NAME_MEMORY_ACTIVE_VERSION);		
+	}
+	
 }
