@@ -17,6 +17,11 @@ public class CompoundInterestResponse extends ServiceResponse {
 		this.results = results;
 	}
 
+	public CompoundInterestResponse(Status status, String message, Long elapsedTimeMs, String version, List<InterestResult> results) {
+		super(status, message, elapsedTimeMs, version);
+		this.results = results;
+	}
+	
 	public List<InterestResult> getResults() {
 		return results;
 	}
@@ -26,7 +31,9 @@ public class CompoundInterestResponse extends ServiceResponse {
 
 	@Override
 	public String toString() {
-		return "CompoundInterestResponse [status=" + getStatus() + ", elapsedTimeMs=" + getElapsedTimeMs() + ", message=" + getMessage() + ", results=" + results + "]";
+		return "CompoundInterestResponse [getStatus()=" + getStatus() + ", getMessage()="
+				+ getMessage() + ", getElapsedTimeMs()=" + getElapsedTimeMs() + ", getVersion()=" + getVersion() + ", results=" + results + "]";
 	}
+
 	
 }

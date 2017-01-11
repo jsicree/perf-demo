@@ -9,8 +9,8 @@ public class DataMapResponse extends ServiceResponse {
 
 	@Override
 	public String toString() {
-		return "DataMapResponse [status=" + getStatus() + ", message=" + getMessage()
-				+ ", elapsedTimeMs=" + getElapsedTimeMs() + "]";
+		return "DataMapResponse [getStatus()=" + getStatus() + ", getMessage()=" + getMessage()
+				+ ", getElapsedTimeMs()=" + getElapsedTimeMs() + ", getVersion()=" + getVersion() + "]";
 	}
 
 	

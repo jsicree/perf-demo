@@ -24,15 +24,52 @@ public class MemoryServiceController {
 	@Autowired
 	private MemoryService memoryService;
 
+	@Autowired
+	private String memoryActiveVersion;
+
 	protected final static Logger log = LoggerFactory.getLogger(MemoryServiceController.class);
+	protected final static String VERSION_1 = "v1";
+	protected final static String VERSION_2 = "v2";
+
+	@RequestMapping(value = "/addDataToMap", method = RequestMethod.POST, produces = "application/json")
+	public DataMapResponse addDataToMap(@RequestBody DataMapRequest request) {
+		return runAddDataToMap(request, memoryActiveVersion);
+	}
+	
+	@RequestMapping(value = "/clearMap", method = RequestMethod.POST, produces = "application/json")
+	public DataMapResponse clearMap() {
+		return runClearMap(memoryActiveVersion);
+	}
 
 	@RequestMapping(value = "/v1/addDataToMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse addDataToBadKeyMap(@RequestBody DataMapRequest request) {
+		return runAddDataToMap(request, VERSION_1);
+	}
+	
+	@RequestMapping(value = "/v1/clearMap", method = RequestMethod.POST, produces = "application/json")
+	public DataMapResponse clearBadKeyMap() {
+		return runClearMap(VERSION_1);
+	}
+	
+	@RequestMapping(value = "/v2/addDataToMap", method = RequestMethod.POST, produces = "application/json")
+	public DataMapResponse addDataToGoodKeyMap(@RequestBody DataMapRequest request) {
+		return runAddDataToMap(request, VERSION_2);
+	}
+
+	@RequestMapping(value = "/v2/clearMap", method = RequestMethod.POST, produces = "application/json")
+	public DataMapResponse clearGoodKeyMap() {
+		return runClearMap(VERSION_2);
+	}
+	
+
+	
+	private DataMapResponse runAddDataToMap(@RequestBody DataMapRequest request, String version) {
 
 		Long startTime = System.currentTimeMillis();
-		log.debug("Calling JSON service addDataToMap (v1)");
+		log.debug("Calling JSON service addDataToMap (" + version + ")");
 
 		DataMapResponse response = new DataMapResponse();
+		response.setVersion(version);
 		if (request != null) {
 			if (request.getNumIterations() != null && 
 					request.getChunkSize() != null)	{
@@ -40,10 +77,13 @@ public class MemoryServiceController {
 				log.debug("ChunkSize: " + request.getChunkSize());
 
 				try {
-					memoryService.populateBadKeyMap(request.getNumIterations(), request.getChunkSize());
+					if (version.equalsIgnoreCase(VERSION_1)) {
+						memoryService.populateBadKeyMap(request.getNumIterations(), request.getChunkSize());						
+					} else if (version.equalsIgnoreCase(VERSION_2)) {
+						memoryService.populateGoodKeyMap(request.getNumIterations(), request.getChunkSize());												
+					}
 
 					response.setStatus(Status.OK);
-					response.setMessage("No out of memory error occurred. You were lucky :) ");
 					response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
 				} catch (ServiceException e) {
 					// TODO Auto-generated catch block
@@ -61,71 +101,18 @@ public class MemoryServiceController {
 		}
 		return response;
 	}
-
 	
-	@RequestMapping(value = "/v1/clearMap", method = RequestMethod.POST, produces = "application/json")
-	public DataMapResponse clearBadKeyMap() {
+	private DataMapResponse runClearMap(String version) {
 
 		Long startTime = System.currentTimeMillis();
-		log.debug("Calling JSON service clearMap (v1)");
+		log.debug("Calling JSON service clearMap (" + version + ")");
 		DataMapResponse response = new DataMapResponse();
 		try {
-			memoryService.clearBadKeyMap();
-			response.setStatus(Status.OK);
-			response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
-		} catch (ServiceException e) {
-			response.setStatus(Status.ERROR);
-			response.setMessage("An exception occurred: " + e.getLocalizedMessage());
-			response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
-			e.printStackTrace();
-		}
-
-		return response;
-	}
-	
-	@RequestMapping(value = "/v2/addDataToMap", method = RequestMethod.POST, produces = "application/json")
-	public DataMapResponse addDataToGoodKeyMap(@RequestBody DataMapRequest request) {
-
-		Long startTime = System.currentTimeMillis();
-		log.debug("Calling JSON service addDataToMap (v2)");
-
-		DataMapResponse response = new DataMapResponse();
-		if (request != null) {
-			if (request.getNumIterations() != null && 
-					request.getChunkSize() != null)	{
-				log.debug("NumInterations: " + request.getNumIterations());
-				log.debug("ChunkSize: " + request.getChunkSize());
-
-				try {
-					memoryService.populateGoodKeyMap(request.getNumIterations(), request.getChunkSize());
-
-					response.setStatus(Status.OK);
-					response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
-				} catch (ServiceException e) {
-					response.setStatus(Status.ERROR);
-					response.setMessage("An exception occurred: " + e.getLocalizedMessage());
-					response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
-					e.printStackTrace();
-				}
-			} else {
-				response.setStatus(Status.ERROR);
-				response.setMessage("The input chunk size is null.");
-				response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
-				log.debug("The input chunk size is null.");
+			if (version.equalsIgnoreCase(VERSION_1)) {
+				memoryService.clearBadKeyMap();
+			} else if (version.equalsIgnoreCase(VERSION_2)) {
+				memoryService.clearGoodKeyMap();				
 			}
-		}
-
-		return response;
-	}
-
-	@RequestMapping(value = "/v2/clearMap", method = RequestMethod.POST, produces = "application/json")
-	public DataMapResponse clearGoodKeyMap() {
-
-		Long startTime = System.currentTimeMillis();
-		log.debug("Calling JSON service clearMap (v2)");
-		DataMapResponse response = new DataMapResponse();
-		try {
-			memoryService.clearGoodKeyMap();
 			response.setStatus(Status.OK);
 			response.setElapsedTimeMs(System.currentTimeMillis() - startTime);
 		} catch (ServiceException e) {
@@ -137,6 +124,5 @@ public class MemoryServiceController {
 
 		return response;
 	}
-	
 	
 }
