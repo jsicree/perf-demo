@@ -3,8 +3,8 @@ package demo.app.demoweb.mvc.data;
 import java.util.Date;
 import java.util.List;
 
-import demo.app.demoapp.data.domain.AccountInfo;
-import demo.app.demoapp.data.domain.Frequency;
+import demo.app.demoapp.data.dto.AccountInfo;
+import demo.app.demoapp.data.dto.Frequency;
 
 public class CompoundInterestRequest {
 	private List<AccountInfo> accounts;

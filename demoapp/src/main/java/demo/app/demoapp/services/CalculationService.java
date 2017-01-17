@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import demo.app.demoapp.data.domain.AccountInfo;
-import demo.app.demoapp.data.domain.Frequency;
-import demo.app.demoapp.data.domain.InterestResult;
+import demo.app.demoapp.data.dto.AccountInfo;
+import demo.app.demoapp.data.dto.Frequency;
+import demo.app.demoapp.data.dto.InterestResult;
 
 public interface CalculationService {
 

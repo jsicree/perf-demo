@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import demo.app.demoapp.data.domain.Account;
-import demo.app.demoapp.data.domain.AccountStatus;
-import demo.app.demoapp.data.domain.AccountType;
+import demo.app.demoapp.data.dto.Account;
+import demo.app.demoapp.data.dto.AccountStatus;
+import demo.app.demoapp.data.dto.AccountType;
 import demo.app.demoapp.services.AccountService;
 import demo.app.demoapp.services.NotImplementedException;
 import demo.app.demoapp.services.ServiceException;

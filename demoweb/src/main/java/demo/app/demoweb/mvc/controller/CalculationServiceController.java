@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.app.demoapp.data.domain.InterestResult;
+import demo.app.demoapp.data.dto.InterestResult;
 import demo.app.demoapp.services.CalculationService;
 import demo.app.demoapp.services.ServiceException;
 import demo.app.demoweb.mvc.data.CompoundInterestRequest;
