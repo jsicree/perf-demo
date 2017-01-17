@@ -1,4 +1,4 @@
 # perf-demo
-Demo web app containing web services with various performance issues.
+Perf-Demo is a simple web application that defines a set of RESTful web services containing various performance issues.
 
-Also includes SOAPUI project files for API testing.
+The project is to be used in a performance podcast demonstrating deployment of an application via AWS CodePipeline and utilizing Dynatrace AppMon and Apica LoadTest. Additional information on the podcast can be found here (TBD).
