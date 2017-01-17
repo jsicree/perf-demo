@@ -1,5 +1,7 @@
 package demo.app.demoapp.services.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -36,10 +38,18 @@ public class FinancialServiceImpl implements FinancialService {
 	public List<FinancialRecord> getAllFinancialRecords() throws ServiceException {
 		return financialRecordRepository.findAll();
 	}
-	
-//	public void computeAveragePrice(List<String> symbolList, Date fromDate, Date toDate) throws ServiceException {
-//		// TODO Auto-generated method stub
-//
-//	}
 
+	public List<FinancialRecord> getFinancialRecords(List<String> symbolList, Date fromDate, Date toDate)
+			throws ServiceException {
+		
+		List<FinancialRecord> recordList = new ArrayList<FinancialRecord>();
+
+		List<FinancialInstrument> instrumentList = financialInstrumentRepository.findBySymbolIn(symbolList);
+		for (FinancialInstrument fi : instrumentList) {
+			recordList.addAll(financialRecordRepository.findByInstrumentId(fi.getId(), fromDate, toDate));			
+		}
+		
+		return recordList;
+		
+	}
 }

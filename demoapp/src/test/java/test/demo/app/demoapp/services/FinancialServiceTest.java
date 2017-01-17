@@ -1,6 +1,7 @@
 package test.demo.app.demoapp.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -21,6 +22,8 @@ public class FinancialServiceTest {
 
 	protected final static Logger log = LoggerFactory.getLogger(FinancialServiceTest.class); 
 
+	private final static String[] SYMBOL_ARRAY = {"AEA", "ABE"};
+	
 	private static FinancialService financialService;
 	private static AbstractApplicationContext context;
 
@@ -72,6 +75,28 @@ public class FinancialServiceTest {
 			e.printStackTrace();
 		}
 		log.info("<< Leaving testGetAllFinancialRecords");
+	}
+
+	@Test
+	public void testGetFinancialRecords() {
+
+		log.info(">> Entering testGetFinancialRecords");
+
+		List<String> symbolList = Arrays.asList(SYMBOL_ARRAY);
+		try {
+			List<FinancialRecord> resultList = new ArrayList<FinancialRecord>();
+			resultList = financialService.getFinancialRecords(symbolList, null, null);
+			org.junit.Assert.assertNotNull("FinRec list was null", resultList);
+			org.junit.Assert.assertNotEquals("FinRec list was empty", resultList.size(), 0);
+			for (FinancialRecord fr : resultList) {
+				log.info(fr.toString());
+			}
+			
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		log.info("<< Leaving testGetFinancialRecords");
 	}
 	
 }
