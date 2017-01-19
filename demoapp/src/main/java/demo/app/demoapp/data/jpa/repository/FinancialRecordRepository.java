@@ -12,7 +12,10 @@ import demo.app.demoapp.data.domain.FinancialRecord;
 @Repository
 public interface FinancialRecordRepository extends JpaRepository<FinancialRecord, Long> {
 
-	@Query("select fr from INSTRUMENT_INFO fr where fr.financialInstrument.id = ?1 and (fr.date >= ?2 and fr.date < ?3) order by fr.date ASC") 
-	public List<FinancialRecord> findByInstrumentId(Long instrumentId, Date fromDate, Date toDate);
+	@Query("select fr from INSTRUMENT_INFO fr where fr.financialInstrument.id = ?1 and fr.date = ?2") 
+	public FinancialRecord findByInstrumentIdAndDate(Long instrumentId, Date date);
+
+	@Query("select fr from INSTRUMENT_INFO fr where fr.financialInstrument.symbol IN ?1 and fr.date = ?2") 
+	public List<FinancialRecord> findByInstrumentIdsAndDate(List<String> symbolList, Date date);
 	
 }

@@ -12,6 +12,7 @@ public interface FinancialService {
 	
 	public List<FinancialRecord> getAllFinancialRecords() throws ServiceException;
 	
-	public List<FinancialRecord> getFinancialRecords(final List<String> symbolList, final Date fromDate, final Date toDate) throws ServiceException;
+	public List<FinancialRecord> getFinancialRecordsForDate_v1(final List<String> symbolList, final Date date) throws ServiceException;
+	public List<FinancialRecord> getFinancialRecordsForDate_v2(final List<String> symbolList, final Date date) throws ServiceException;
 
 }

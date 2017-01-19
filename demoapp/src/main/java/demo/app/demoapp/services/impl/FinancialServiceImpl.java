@@ -39,17 +39,31 @@ public class FinancialServiceImpl implements FinancialService {
 		return financialRecordRepository.findAll();
 	}
 
-	public List<FinancialRecord> getFinancialRecords(List<String> symbolList, Date fromDate, Date toDate)
+	public List<FinancialRecord> getFinancialRecordsForDate_v1(List<String> symbolList, Date date)
 			throws ServiceException {
 		
 		List<FinancialRecord> recordList = new ArrayList<FinancialRecord>();
 
 		List<FinancialInstrument> instrumentList = financialInstrumentRepository.findBySymbolIn(symbolList);
 		for (FinancialInstrument fi : instrumentList) {
-			recordList.addAll(financialRecordRepository.findByInstrumentId(fi.getId(), fromDate, toDate));			
+			FinancialRecord fr = financialRecordRepository.findByInstrumentIdAndDate(fi.getId(), date); 
+			if (fr != null)
+				recordList.add(fr);			
 		}
 		
 		return recordList;
 		
 	}
+	
+	public List<FinancialRecord> getFinancialRecordsForDate_v2(List<String> symbolList, Date date)
+			throws ServiceException {
+		
+		List<FinancialRecord> recordList = new ArrayList<FinancialRecord>();
+
+		recordList = financialRecordRepository.findByInstrumentIdsAndDate(symbolList, date); 
+
+		return recordList;
+		
+	}
+	
 }

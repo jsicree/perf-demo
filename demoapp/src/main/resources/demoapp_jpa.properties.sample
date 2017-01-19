@@ -1,11 +1,12 @@
 # MySQL Database Configuration
 # URL Format: jdbc:mysql://host:port/schema?flags
-
-db.url=jdbc:mysql://localhost:3306/application?useSSL=false&serverTimezone=EST5EDT
-db.username=appUser
-db.password=password
+#db.url=jdbc:mysql://localhost:3306/application?useSSL=false&serverTimezone=EST5EDT
+#db.username=<USERNAME>
+#db.password=<PASSWORD>
 
 db.driverClass=com.mysql.jdbc.Driver
+
+
 
 #Hibernate Configuration
 hibernate.format_sql=true
