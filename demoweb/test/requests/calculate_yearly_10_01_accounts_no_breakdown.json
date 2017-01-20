@@ -1,0 +1,17 @@
+{
+	"accounts": [
+		{	"identifier": "ACCOUNT-001",
+			"balance": {
+				"value": "12000",
+				"currency": "USD"
+			},
+			"rate": "0.0200" 
+		} 					 							 			
+	],
+	"startDate": "2017-12-21T06:00:00.000Z",	
+	"intervals": "10",
+	"frequency": "YEARLY",
+	"includeBreakdowns": "false"	
+}
+
+
