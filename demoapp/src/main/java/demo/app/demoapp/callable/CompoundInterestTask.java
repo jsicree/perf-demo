@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-import demo.app.demoapp.data.domain.AccountInfo;
-import demo.app.demoapp.data.domain.Frequency;
-import demo.app.demoapp.data.domain.Money;
-import demo.app.demoapp.data.domain.InterestResult;
+import demo.app.demoapp.data.dto.AccountInfo;
+import demo.app.demoapp.data.dto.Frequency;
+import demo.app.demoapp.data.dto.InterestResult;
+import demo.app.demoapp.data.dto.Money;
 
 public class CompoundInterestTask implements Callable<InterestResult> {
 

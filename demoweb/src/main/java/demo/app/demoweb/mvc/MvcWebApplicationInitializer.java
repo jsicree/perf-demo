@@ -3,12 +3,13 @@ package demo.app.demoweb.mvc;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import demo.app.demoapp.AppConfig;
+import demo.app.demoapp.data.jpa.JpaConfig;
 
 public class MvcWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {AppConfig.class};
+		return new Class[] {AppConfig.class, JpaConfig.class};
 	}
 
 	@Override

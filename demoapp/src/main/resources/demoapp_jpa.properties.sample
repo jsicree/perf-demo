@@ -1,0 +1,15 @@
+# MySQL Database Configuration
+# URL Format: jdbc:mysql://host:port/schema?flags
+#db.url=jdbc:mysql://localhost:3306/application?useSSL=false&serverTimezone=EST5EDT
+#db.username=<USERNAME>
+#db.password=<PASSWORD>
+
+db.driverClass=com.mysql.jdbc.Driver
+
+#Hibernate Configuration
+hibernate.format_sql=true
+hibernate.dialect=org.hibernate.dialect.MySQLDialect
+hibernate.ejb.naming_strategy=org.hibernate.cfg.ImplicitNamingStrategy 
+hibernate.show_sql=false
+
+entitymanager.packages.to.scan=demo.app.demoapp.data

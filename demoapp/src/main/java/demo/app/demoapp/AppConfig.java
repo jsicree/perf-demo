@@ -11,9 +11,11 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import demo.app.demoapp.services.AccountService;
 import demo.app.demoapp.services.CalculationService;
+import demo.app.demoapp.services.FinancialService;
 import demo.app.demoapp.services.MemoryService;
 import demo.app.demoapp.services.impl.AccountServiceSimpleImpl;
 import demo.app.demoapp.services.impl.CalculationServiceImpl;
+import demo.app.demoapp.services.impl.FinancialServiceImpl;
 import demo.app.demoapp.services.impl.MemoryServiceImpl;
 
 @Configuration
@@ -48,6 +50,12 @@ public class AppConfig {
 	public MemoryService memoryService() {
 		return new MemoryServiceImpl();
 	}
+
+	@Bean
+	public FinancialService financialService() {
+		return new FinancialServiceImpl();
+	}
+	
 	
 	@Bean
 	public ThreadPoolTaskExecutor taskExecutor() {
