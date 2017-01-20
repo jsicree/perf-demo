@@ -26,7 +26,7 @@ public class FinancialServiceTest {
 
 	protected final static Logger log = LoggerFactory.getLogger(FinancialServiceTest.class); 
 
-	private final static String[] SYMBOL_ARRAY = {"AEA", "ABE"};
+	private final static String[] SYMBOL_ARRAY = {"RTN", "TOL"};
 	
 	private static FinancialService financialService;
 	private static AbstractApplicationContext context;
@@ -94,7 +94,7 @@ public class FinancialServiceTest {
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");		
 			Date date = null;
 			try {
-				date = sdf.parse("02/05/2010");
+				date = sdf.parse("10/05/2009");
 				log.info("Date = " + sdf.format(date));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -125,7 +125,7 @@ public class FinancialServiceTest {
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");		
 			Date date = null;
 			try {
-				date = sdf.parse("02/05/2010");
+				date = sdf.parse("10/05/2009");
 				log.info("Date = " + sdf.format(date));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
