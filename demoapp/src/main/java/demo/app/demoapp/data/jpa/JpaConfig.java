@@ -29,6 +29,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @Configuration
 @EnableJpaRepositories(basePackages = { "demo.app.demoapp.data.jpa.repository" })
 @PropertySource({ "classpath:demoapp_jpa.properties" })
+@EnableCaching
 public class JpaConfig {
 
 	private static final String PROPERTY_NAME_DATABASE_DRIVER_CLASS = "db.driverClass";
@@ -110,5 +111,14 @@ public class JpaConfig {
 			EntityManagerFactory entityManagerFactory) {
 		return new JpaTransactionManager(entityManagerFactory);
 	}
-		
+	
+	@Bean
+    public CacheManager cacheManager() {
+        // configure and return an implementation of Spring's CacheManager SPI
+        SimpleCacheManager cacheManager = new SimpleCacheManager();
+        ArrayList<ConcurrentMapCache> cacheList = new ArrayList<ConcurrentMapCache>();
+        cacheManager.setCaches(cacheList);
+        return cacheManager;
+    }
+	
 }

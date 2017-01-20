@@ -6,8 +6,6 @@
 
 db.driverClass=com.mysql.jdbc.Driver
 
-
-
 #Hibernate Configuration
 hibernate.format_sql=true
 hibernate.dialect=org.hibernate.dialect.MySQLDialect
