@@ -1,0 +1,94 @@
+{
+	"accounts": [
+		{	"identifier": "ACCOUNT-001",
+			"balance": {
+				"value": "12000",
+				"currency": "USD"
+			},
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-002",
+			"balance": {
+				"value": "10500.00",
+				"currency": "USD"
+			},
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-003",
+			"balance": {
+				"value": "15275.00",
+				"currency": "USD"				
+			},
+			"rate": "0.0180" 
+		},{	
+			"identifier": "ACCOUNT-004",
+			"balance": {
+				"value": "12000",
+				"currency": "USD"
+			},
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-005",
+			"balance": {
+				"value": "10500.00",
+				"currency": "USD"
+			},
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-006",
+			"balance": {
+				"value": "15275.00",
+				"currency": "USD"				
+			},
+			"rate": "0.0180" 
+		},{	
+			"identifier": "ACCOUNT-007",
+			"balance": {
+				"value": "12000",
+				"currency": "USD"
+			},
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-008",
+			"balance": {
+				"value": "10500.00",
+				"currency": "USD"
+			},
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-009",
+			"balance": {
+				"value": "15275.00",
+				"currency": "USD"				
+			},
+			"rate": "0.0180" 
+		},{	
+			"identifier": "ACCOUNT-010",
+			"balance": {
+				"value": "12000",
+				"currency": "USD"
+			},
+			"rate": "0.0200" 
+		},{
+			"identifier": "ACCOUNT-011",
+			"balance": {
+				"value": "10500.00",
+				"currency": "USD"
+			},
+			"rate": "0.0230" 
+		},{
+			"identifier": "ACCOUNT-012",
+			"balance": {
+				"value": "15275.00",
+				"currency": "USD"				
+			},
+			"rate": "0.0180" 
+		} 					 							 			
+	],
+	"startDate": "2017-12-21T06:00:00.000Z",	
+	"intervals": "10",
+	"frequency": "YEARLY",
+	"includeBreakdowns": "false"	
+}
+
+
