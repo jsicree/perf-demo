@@ -2,7 +2,7 @@ package demo.app.demoweb.mvc.data;
 
 import java.util.List;
 
-import demo.app.demoapp.data.domain.InterestResult;
+import demo.app.demoapp.data.dto.InterestResult;
 
 public class CompoundInterestResponse extends ServiceResponse {
 	private List<InterestResult> results;

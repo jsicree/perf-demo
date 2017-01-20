@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.app.demoapp.data.domain.Account;
+import demo.app.demoapp.data.dto.Account;
 import demo.app.demoapp.services.AccountService;
 import demo.app.demoapp.services.ServiceException;
 import demo.app.demoweb.mvc.data.BandDto;

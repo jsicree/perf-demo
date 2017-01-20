@@ -1,4 +1,4 @@
-package demo.app.demoapp.data.domain;
+package demo.app.demoapp.data.dto;
 
 public class AccountInfo {
 	private String identifier;

@@ -1,4 +1,4 @@
-package demo.app.demoapp.data.domain;
+package demo.app.demoapp.data.dto;
 
 import java.util.Date;
 

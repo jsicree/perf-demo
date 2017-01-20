@@ -11,7 +11,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
-import org.springframework.validation.Validator;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -28,6 +27,7 @@ public class MvcWebConfig extends WebMvcConfigurerAdapter {
 
 	private static final String PROPERTY_NAME_CALCULATE_ACTIVE_VERSION = "caclulate.active.version";
 	private static final String PROPERTY_NAME_MEMORY_ACTIVE_VERSION = "memory.active.version";
+	private static final String PROPERTY_NAME_FINANCE_ACTIVE_VERSION = "finance.active.version";
 
 	@Resource
 	private Environment environment;
@@ -81,6 +81,11 @@ public class MvcWebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public String memoryActiveVersion() {
 		return environment.getProperty(PROPERTY_NAME_MEMORY_ACTIVE_VERSION);		
+	}
+
+	@Bean
+	public String financeActiveVersion() {
+		return environment.getProperty(PROPERTY_NAME_FINANCE_ACTIVE_VERSION);		
 	}
 	
 }

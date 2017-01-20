@@ -2,7 +2,7 @@ package demo.app.demoapp.services;
 
 import java.util.List;
 
-import demo.app.demoapp.data.domain.Account;
+import demo.app.demoapp.data.dto.Account;
 
 public interface AccountService {
 

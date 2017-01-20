@@ -10,7 +10,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 import demo.app.demoapp.AppConfig;
-import demo.app.demoapp.data.domain.Account;
+import demo.app.demoapp.data.dto.Account;
 import demo.app.demoapp.services.AccountService;
 import demo.app.demoapp.services.ServiceException;
 

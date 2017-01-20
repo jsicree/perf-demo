@@ -17,10 +17,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import demo.app.demoapp.callable.CompoundInterestTask;
-import demo.app.demoapp.data.domain.AccountInfo;
-import demo.app.demoapp.data.domain.Frequency;
-import demo.app.demoapp.data.domain.InterestResult;
-import demo.app.demoapp.data.domain.Money;
+import demo.app.demoapp.data.dto.AccountInfo;
+import demo.app.demoapp.data.dto.Frequency;
+import demo.app.demoapp.data.dto.InterestResult;
+import demo.app.demoapp.data.dto.Money;
 import demo.app.demoapp.services.CalculationService;
 import demo.app.demoapp.services.ServiceException;
 
