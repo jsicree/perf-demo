@@ -1,6 +1,0 @@
-language: java
-jdk:
-  - oraclejdk8
-script: 
-  - cd demoall
-  - mvn clean compile -DskipTests=true
