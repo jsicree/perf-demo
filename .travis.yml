@@ -2,5 +2,4 @@ language: java
 jdk:
   - oraclejdk8
 script: 
-  - cd demoall
-  - mvn clean compile -DskipTests=true
+  - mvn -f demoall/pom.xml -DskipTests=true clean compile 
