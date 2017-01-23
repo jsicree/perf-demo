@@ -18,12 +18,12 @@ phases:
       - mvn -f demoall/pom.xml install
   post_build:
     commands:
+      - mv demoweb/target/demoweb.war demoweb.war
+      - mkdir .ebextensions
+      - mv demoweb/.ebextensions/* .ebextensions/
       - echo Build completed on `date`
 
 artifacts:
   files:
-    - demoweb/target/demoweb.war
-    - move-war.sh
-  discard-paths: yes
-    
-    
+    - demoweb.war
+    - .ebextensions/**/*
