@@ -1,3 +1,5 @@
+USE application;
+
 CREATE TABLE `INSTRUMENT` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `SYMBOL` varchar(5) NOT NULL,

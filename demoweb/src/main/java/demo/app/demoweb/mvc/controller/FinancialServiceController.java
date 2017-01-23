@@ -19,6 +19,7 @@ import demo.app.demoapp.data.dto.DtoConverter;
 import demo.app.demoapp.data.dto.FinancialRecordDto;
 import demo.app.demoapp.services.FinancialService;
 import demo.app.demoapp.services.ServiceException;
+import demo.app.demoweb.ServiceVersion;
 import demo.app.demoweb.mvc.data.FinancialRecordRequest;
 import demo.app.demoweb.mvc.data.FinancialRecordResponse;
 import demo.app.demoweb.mvc.data.Status;
@@ -37,8 +38,7 @@ public class FinancialServiceController {
 	private String financeActiveVersion;
 
 	protected final static Logger log = LoggerFactory.getLogger(FinancialServiceController.class);
-	protected final static String VERSION_1 = "v1";
-	protected final static String VERSION_2 = "v2";
+
 	protected final static String DATE_FORMAT = "MM/dd/yyyy";
 	protected final static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
 
@@ -49,12 +49,12 @@ public class FinancialServiceController {
 
 	@RequestMapping(value = "/v1/getFinancialRecordsByDate", method = RequestMethod.POST, produces = "application/json")
 	public FinancialRecordResponse getFinancialRecordsByDate_v1(@RequestBody FinancialRecordRequest request) {
-		return runGetFinancialRecordsByDate(request, VERSION_1);
+		return runGetFinancialRecordsByDate(request, ServiceVersion.VERSION_1.versionName());
 	}
 
 	@RequestMapping(value = "/v2/getFinancialRecordsByDate", method = RequestMethod.POST, produces = "application/json")
 	public FinancialRecordResponse getFinancialRecordsByDate_v2(@RequestBody FinancialRecordRequest request) {
-		return runGetFinancialRecordsByDate(request, VERSION_2);
+		return runGetFinancialRecordsByDate(request, ServiceVersion.VERSION_2.versionName());
 	}
 
 	private FinancialRecordResponse runGetFinancialRecordsByDate(FinancialRecordRequest request, String version) {

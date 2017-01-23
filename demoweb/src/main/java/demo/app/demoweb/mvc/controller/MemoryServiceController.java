@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import demo.app.demoapp.services.MemoryService;
 import demo.app.demoapp.services.ServiceException;
+import demo.app.demoweb.ServiceVersion;
 import demo.app.demoweb.mvc.data.DataMapRequest;
 import demo.app.demoweb.mvc.data.DataMapResponse;
 import demo.app.demoweb.mvc.data.Status;
@@ -28,8 +29,6 @@ public class MemoryServiceController {
 	private String memoryActiveVersion;
 
 	protected final static Logger log = LoggerFactory.getLogger(MemoryServiceController.class);
-	protected final static String VERSION_1 = "v1";
-	protected final static String VERSION_2 = "v2";
 
 	@RequestMapping(value = "/addDataToMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse addDataToMap(@RequestBody DataMapRequest request) {
@@ -43,25 +42,23 @@ public class MemoryServiceController {
 
 	@RequestMapping(value = "/v1/addDataToMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse addDataToBadKeyMap(@RequestBody DataMapRequest request) {
-		return runAddDataToMap(request, VERSION_1);
+		return runAddDataToMap(request, ServiceVersion.VERSION_1.versionName());
 	}
 	
 	@RequestMapping(value = "/v1/clearMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse clearBadKeyMap() {
-		return runClearMap(VERSION_1);
+		return runClearMap(ServiceVersion.VERSION_1.versionName());
 	}
 	
 	@RequestMapping(value = "/v2/addDataToMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse addDataToGoodKeyMap(@RequestBody DataMapRequest request) {
-		return runAddDataToMap(request, VERSION_2);
+		return runAddDataToMap(request, ServiceVersion.VERSION_2.versionName());
 	}
 
 	@RequestMapping(value = "/v2/clearMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse clearGoodKeyMap() {
-		return runClearMap(VERSION_2);
+		return runClearMap(ServiceVersion.VERSION_2.versionName());
 	}
-	
-
 	
 	private DataMapResponse runAddDataToMap(@RequestBody DataMapRequest request, String version) {
 
