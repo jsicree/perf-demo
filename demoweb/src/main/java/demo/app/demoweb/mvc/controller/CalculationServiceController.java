@@ -36,14 +36,14 @@ public class CalculationServiceController {
 	@RequestMapping(value = "/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
 	public CompoundInterestResponse computeCompoundInterest(@RequestBody CompoundInterestRequest request) {
 
-		return runComputeCompoundInterest(request, calculateActiveVersion);
+		return runComputeCompoundInterest(request, ServiceVersion.valueOf(calculateActiveVersion));
 		
 	}
 		
 	@RequestMapping(value = "/v1/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
 	public CompoundInterestResponse computeCompoundInterest_v1(@RequestBody CompoundInterestRequest request) {
 
-		return runComputeCompoundInterest(request, ServiceVersion.VERSION_1.versionName());
+		return runComputeCompoundInterest(request, ServiceVersion.VERSION_1);
 
 	}
 
@@ -51,17 +51,17 @@ public class CalculationServiceController {
 	@RequestMapping(value = "/v2/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
 	public CompoundInterestResponse computeCompoundInterest_v2(@RequestBody CompoundInterestRequest request) {
 
-		return runComputeCompoundInterest(request, ServiceVersion.VERSION_2.versionName());
+		return runComputeCompoundInterest(request, ServiceVersion.VERSION_2);
 	
 	}
 
-	private CompoundInterestResponse runComputeCompoundInterest(CompoundInterestRequest request, String version) {
+	private CompoundInterestResponse runComputeCompoundInterest(CompoundInterestRequest request, ServiceVersion version) {
 
 		Long startTime = System.currentTimeMillis();
 		log.debug("Calling JSON service computeCompoundInterest (" + version + ")");
 
 		CompoundInterestResponse response = new CompoundInterestResponse();
-		response.setVersion(version);
+		response.setVersion(version.versionName());
 		
 		if (request != null) {
 			if (request.getAccounts() != null && 
@@ -77,10 +77,10 @@ public class CalculationServiceController {
 				try {
 					List<InterestResult> resultList = null;
 					
-					if (version.equalsIgnoreCase(VERSION_1)) {
+					if (version == ServiceVersion.VERSION_1) {
 						resultList = calculationService.calculateCompoundInterest(request.getAccounts(), request.getStartDate(), 
 								request.getIntervals(), request.getFrequency() , request.getIncludeBreakdowns());
-					} else if (version.equalsIgnoreCase(VERSION_2)) {
+					} else if (version == ServiceVersion.VERSION_2) {
 						resultList = calculationService.calculateCompoundInterestAsync(request.getAccounts(), request.getStartDate(), 
 								request.getIntervals(), request.getFrequency() , request.getIncludeBreakdowns());
 					}

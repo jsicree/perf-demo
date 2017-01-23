@@ -8,6 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 import demo.app.demoapp.AppConfig;
+import demo.app.demoapp.data.jpa.JpaConfig;
 import demo.app.demoapp.services.MemoryService;
 import demo.app.demoapp.services.ServiceException;
 
@@ -21,7 +22,7 @@ public class MemoryServiceTest {
 	@BeforeClass
 	public static void setup() {
 
-		context = new AnnotationConfigApplicationContext(AppConfig.class);		
+		context = new AnnotationConfigApplicationContext(AppConfig.class, JpaConfig.class);		
 		memoryService = (MemoryService) context
 				.getBean("memoryService");				
 	}
