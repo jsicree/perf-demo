@@ -11,6 +11,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 
 import demo.app.demoapp.AppConfig;
 import demo.app.demoapp.data.dto.Account;
+import demo.app.demoapp.data.jpa.JpaConfig;
 import demo.app.demoapp.services.AccountService;
 import demo.app.demoapp.services.ServiceException;
 
@@ -27,7 +28,7 @@ public class AccountServiceTest {
 	@BeforeClass
 	public static void setup() {
 
-		context = new AnnotationConfigApplicationContext(AppConfig.class);		
+		context = new AnnotationConfigApplicationContext(AppConfig.class, JpaConfig.class);		
 		accountService = (AccountService) context
 				.getBean("accountService");				
 	}
