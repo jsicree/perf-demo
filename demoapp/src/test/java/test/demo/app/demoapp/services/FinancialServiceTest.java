@@ -83,7 +83,6 @@ public class FinancialServiceTest {
 		log.info("<< Leaving testGetAllFinancialRecords");
 	}
 
-	@Test
 	public void testGetFinancialRecordsForDate_v1() {
 
 		log.info(">> Entering testGetFinancialRecordsForDate_v1");
@@ -113,7 +112,7 @@ public class FinancialServiceTest {
 		}
 		log.info("<< Leaving testGetFinancialRecordsForDate_v1");
 	}
-
+	
 	@Test
 	public void testGetFinancialRecordsForDate_v2() {
 

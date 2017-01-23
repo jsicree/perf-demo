@@ -1,7 +1,6 @@
 package demo.app.demoweb.mvc.controller;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import demo.app.demoapp.data.dto.InterestResult;
 import demo.app.demoapp.services.CalculationService;
 import demo.app.demoapp.services.ServiceException;
+import demo.app.demoweb.ServiceVersion;
 import demo.app.demoweb.mvc.data.CompoundInterestRequest;
 import demo.app.demoweb.mvc.data.CompoundInterestResponse;
 import demo.app.demoweb.mvc.data.Status;
@@ -32,41 +32,36 @@ public class CalculationServiceController {
 	private String calculateActiveVersion;
 
 	protected final static Logger log = LoggerFactory.getLogger(CalculationServiceController.class);
-
-	protected final static String VERSION_1 = "v1";
-	protected final static String VERSION_2 = "v2";
-	
 	
 	@RequestMapping(value = "/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
 	public CompoundInterestResponse computeCompoundInterest(@RequestBody CompoundInterestRequest request) {
 
-		return runComputeCompoundInterest(request, calculateActiveVersion);
+		return runComputeCompoundInterest(request, ServiceVersion.valueOf(calculateActiveVersion));
 		
 	}
-	
-	
+		
 	@RequestMapping(value = "/v1/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
-	public CompoundInterestResponse computeCompoundInterestSync(@RequestBody CompoundInterestRequest request) {
+	public CompoundInterestResponse computeCompoundInterest_v1(@RequestBody CompoundInterestRequest request) {
 
-		return runComputeCompoundInterest(request, VERSION_1);
+		return runComputeCompoundInterest(request, ServiceVersion.VERSION_1);
 
 	}
 
 
 	@RequestMapping(value = "/v2/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
-	public CompoundInterestResponse computeCompoundInterestAsync(@RequestBody CompoundInterestRequest request) {
+	public CompoundInterestResponse computeCompoundInterest_v2(@RequestBody CompoundInterestRequest request) {
 
-		return runComputeCompoundInterest(request, VERSION_2);
+		return runComputeCompoundInterest(request, ServiceVersion.VERSION_2);
 	
 	}
 
-	private CompoundInterestResponse runComputeCompoundInterest(CompoundInterestRequest request, String version) {
+	private CompoundInterestResponse runComputeCompoundInterest(CompoundInterestRequest request, ServiceVersion version) {
 
 		Long startTime = System.currentTimeMillis();
 		log.debug("Calling JSON service computeCompoundInterest (" + version + ")");
 
 		CompoundInterestResponse response = new CompoundInterestResponse();
-		response.setVersion(version);
+		response.setVersion(version.versionName());
 		
 		if (request != null) {
 			if (request.getAccounts() != null && 
@@ -82,10 +77,10 @@ public class CalculationServiceController {
 				try {
 					List<InterestResult> resultList = null;
 					
-					if (version.equalsIgnoreCase(VERSION_1)) {
+					if (version == ServiceVersion.VERSION_1) {
 						resultList = calculationService.calculateCompoundInterest(request.getAccounts(), request.getStartDate(), 
 								request.getIntervals(), request.getFrequency() , request.getIncludeBreakdowns());
-					} else if (version.equalsIgnoreCase(VERSION_2)) {
+					} else if (version == ServiceVersion.VERSION_2) {
 						resultList = calculationService.calculateCompoundInterestAsync(request.getAccounts(), request.getStartDate(), 
 								request.getIntervals(), request.getFrequency() , request.getIncludeBreakdowns());
 					}

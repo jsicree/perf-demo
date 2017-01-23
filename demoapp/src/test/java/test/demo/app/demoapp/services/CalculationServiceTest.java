@@ -18,6 +18,7 @@ import demo.app.demoapp.data.dto.AccountInfo;
 import demo.app.demoapp.data.dto.Frequency;
 import demo.app.demoapp.data.dto.InterestResult;
 import demo.app.demoapp.data.dto.Money;
+import demo.app.demoapp.data.jpa.JpaConfig;
 import demo.app.demoapp.services.CalculationService;
 import demo.app.demoapp.services.ServiceException;
 
@@ -41,7 +42,7 @@ public class CalculationServiceTest {
 	@BeforeClass
 	public static void setup() {
 
-		context = new AnnotationConfigApplicationContext(AppConfig.class);		
+		context = new AnnotationConfigApplicationContext(AppConfig.class, JpaConfig.class);		
 		calcService = (CalculationService) context
 				.getBean("calculationService");				
 	}

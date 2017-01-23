@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import demo.app.demoapp.services.MemoryService;
 import demo.app.demoapp.services.ServiceException;
+import demo.app.demoweb.ServiceVersion;
 import demo.app.demoweb.mvc.data.DataMapRequest;
 import demo.app.demoweb.mvc.data.DataMapResponse;
 import demo.app.demoweb.mvc.data.Status;
@@ -28,48 +29,44 @@ public class MemoryServiceController {
 	private String memoryActiveVersion;
 
 	protected final static Logger log = LoggerFactory.getLogger(MemoryServiceController.class);
-	protected final static String VERSION_1 = "v1";
-	protected final static String VERSION_2 = "v2";
 
 	@RequestMapping(value = "/addDataToMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse addDataToMap(@RequestBody DataMapRequest request) {
-		return runAddDataToMap(request, memoryActiveVersion);
+		return runAddDataToMap(request, ServiceVersion.valueOf(memoryActiveVersion));
 	}
 	
 	@RequestMapping(value = "/clearMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse clearMap() {
-		return runClearMap(memoryActiveVersion);
+		return runClearMap(ServiceVersion.valueOf(memoryActiveVersion));
 	}
 
 	@RequestMapping(value = "/v1/addDataToMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse addDataToBadKeyMap(@RequestBody DataMapRequest request) {
-		return runAddDataToMap(request, VERSION_1);
+		return runAddDataToMap(request, ServiceVersion.VERSION_1);
 	}
 	
 	@RequestMapping(value = "/v1/clearMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse clearBadKeyMap() {
-		return runClearMap(VERSION_1);
+		return runClearMap(ServiceVersion.VERSION_1);
 	}
 	
 	@RequestMapping(value = "/v2/addDataToMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse addDataToGoodKeyMap(@RequestBody DataMapRequest request) {
-		return runAddDataToMap(request, VERSION_2);
+		return runAddDataToMap(request, ServiceVersion.VERSION_2);
 	}
 
 	@RequestMapping(value = "/v2/clearMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse clearGoodKeyMap() {
-		return runClearMap(VERSION_2);
+		return runClearMap(ServiceVersion.VERSION_2);
 	}
 	
-
-	
-	private DataMapResponse runAddDataToMap(@RequestBody DataMapRequest request, String version) {
+	private DataMapResponse runAddDataToMap(@RequestBody DataMapRequest request, ServiceVersion version) {
 
 		Long startTime = System.currentTimeMillis();
 		log.debug("Calling JSON service addDataToMap (" + version + ")");
 
 		DataMapResponse response = new DataMapResponse();
-		response.setVersion(version);
+		response.setVersion(version.versionName());
 		if (request != null) {
 			if (request.getNumIterations() != null && 
 					request.getChunkSize() != null)	{
@@ -77,9 +74,9 @@ public class MemoryServiceController {
 				log.debug("ChunkSize: " + request.getChunkSize());
 
 				try {
-					if (version.equalsIgnoreCase(VERSION_1)) {
+					if (version == ServiceVersion.VERSION_1) {
 						memoryService.populateBadKeyMap(request.getNumIterations(), request.getChunkSize());						
-					} else if (version.equalsIgnoreCase(VERSION_2)) {
+					} else if (version == ServiceVersion.VERSION_2) {
 						memoryService.populateGoodKeyMap(request.getNumIterations(), request.getChunkSize());												
 					}
 
@@ -102,15 +99,15 @@ public class MemoryServiceController {
 		return response;
 	}
 	
-	private DataMapResponse runClearMap(String version) {
+	private DataMapResponse runClearMap(ServiceVersion version) {
 
 		Long startTime = System.currentTimeMillis();
 		log.debug("Calling JSON service clearMap (" + version + ")");
 		DataMapResponse response = new DataMapResponse();
 		try {
-			if (version.equalsIgnoreCase(VERSION_1)) {
+			if (version == ServiceVersion.VERSION_1) {
 				memoryService.clearBadKeyMap();
-			} else if (version.equalsIgnoreCase(VERSION_2)) {
+			} else if (version == ServiceVersion.VERSION_2) {
 				memoryService.clearGoodKeyMap();				
 			}
 			response.setStatus(Status.OK);

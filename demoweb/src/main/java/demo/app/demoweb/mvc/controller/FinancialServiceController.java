@@ -19,6 +19,7 @@ import demo.app.demoapp.data.dto.DtoConverter;
 import demo.app.demoapp.data.dto.FinancialRecordDto;
 import demo.app.demoapp.services.FinancialService;
 import demo.app.demoapp.services.ServiceException;
+import demo.app.demoweb.ServiceVersion;
 import demo.app.demoweb.mvc.data.FinancialRecordRequest;
 import demo.app.demoweb.mvc.data.FinancialRecordResponse;
 import demo.app.demoweb.mvc.data.Status;
@@ -37,32 +38,32 @@ public class FinancialServiceController {
 	private String financeActiveVersion;
 
 	protected final static Logger log = LoggerFactory.getLogger(FinancialServiceController.class);
-	protected final static String VERSION_1 = "v1";
-	protected final static String VERSION_2 = "v2";
+
 	protected final static String DATE_FORMAT = "MM/dd/yyyy";
+	
 	protected final static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
 
 	@RequestMapping(value = "/getFinancialRecordsByDate", method = RequestMethod.POST, produces = "application/json")
 	public FinancialRecordResponse getFinancialRecordsByDate(@RequestBody FinancialRecordRequest request) {
-		return runGetFinancialRecordsByDate(request, financeActiveVersion);
+		return runGetFinancialRecordsByDate(request, ServiceVersion.valueOf(financeActiveVersion));
 	}
 
 	@RequestMapping(value = "/v1/getFinancialRecordsByDate", method = RequestMethod.POST, produces = "application/json")
 	public FinancialRecordResponse getFinancialRecordsByDate_v1(@RequestBody FinancialRecordRequest request) {
-		return runGetFinancialRecordsByDate(request, VERSION_1);
+		return runGetFinancialRecordsByDate(request, ServiceVersion.VERSION_1);
 	}
 
 	@RequestMapping(value = "/v2/getFinancialRecordsByDate", method = RequestMethod.POST, produces = "application/json")
 	public FinancialRecordResponse getFinancialRecordsByDate_v2(@RequestBody FinancialRecordRequest request) {
-		return runGetFinancialRecordsByDate(request, VERSION_2);
+		return runGetFinancialRecordsByDate(request, ServiceVersion.VERSION_2);
 	}
 
-	private FinancialRecordResponse runGetFinancialRecordsByDate(FinancialRecordRequest request, String version) {
+	private FinancialRecordResponse runGetFinancialRecordsByDate(FinancialRecordRequest request, ServiceVersion version) {
 		Long startTime = System.currentTimeMillis();
 		log.debug("Calling JSON service getFinancialRecordsByDate (" + version + ")");
 
 		FinancialRecordResponse response = new FinancialRecordResponse();
-		response.setVersion(version);
+		response.setVersion(version.versionName());
 		if (request != null) {
 			if (request.getDate() != null && request.getTickerSymbols() != null
 					&& !request.getTickerSymbols().isEmpty()) {
@@ -80,9 +81,9 @@ public class FinancialServiceController {
 				}
 
 				try {
-					if (version.equalsIgnoreCase(VERSION_1)) {
+					if (version == ServiceVersion.VERSION_1) {
 						recordList = financialService.getFinancialRecordsForDate_v1(request.getTickerSymbols(), date);
-					} else if (version.equalsIgnoreCase(VERSION_2)) {
+					} else if (version == ServiceVersion.VERSION_2) {
 						recordList = financialService.getFinancialRecordsForDate_v2(request.getTickerSymbols(), date);						
 					}
 					response.setStatus(Status.OK);
