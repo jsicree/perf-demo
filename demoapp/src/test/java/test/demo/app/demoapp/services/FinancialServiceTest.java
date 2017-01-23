@@ -31,13 +31,13 @@ public class FinancialServiceTest {
 	private static FinancialService financialService;
 	private static AbstractApplicationContext context;
 
-	@BeforeClass
-	public static void setup() {
-
-		context = new AnnotationConfigApplicationContext(AppConfig.class, JpaConfig.class);		
-		financialService = (FinancialService) context
-				.getBean("financialService");				
-	}
+//	@BeforeClass
+//	public static void setup() {
+//
+//		context = new AnnotationConfigApplicationContext(AppConfig.class, JpaConfig.class);		
+//		financialService = (FinancialService) context
+//				.getBean("financialService");				
+//	}
 		
 	@Test
 	@Ignore
@@ -83,6 +83,8 @@ public class FinancialServiceTest {
 		log.info("<< Leaving testGetAllFinancialRecords");
 	}
 
+	@Test
+	@Ignore
 	public void testGetFinancialRecordsForDate_v1() {
 
 		log.info(">> Entering testGetFinancialRecordsForDate_v1");
@@ -114,6 +116,7 @@ public class FinancialServiceTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testGetFinancialRecordsForDate_v2() {
 
 		log.info(">> Entering testGetFinancialRecordsForDate_v2");
