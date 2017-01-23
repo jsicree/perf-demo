@@ -31,13 +31,13 @@ public class FinancialServiceTest {
 	private static FinancialService financialService;
 	private static AbstractApplicationContext context;
 
-//	@BeforeClass
-//	public static void setup() {
-//
-//		context = new AnnotationConfigApplicationContext(AppConfig.class, JpaConfig.class);		
-//		financialService = (FinancialService) context
-//				.getBean("financialService");				
-//	}
+	@BeforeClass
+	public static void setup() {
+
+		context = new AnnotationConfigApplicationContext(AppConfig.class, JpaConfig.class);		
+		financialService = (FinancialService) context
+				.getBean("financialService");				
+	}
 		
 	@Test
 	@Ignore
