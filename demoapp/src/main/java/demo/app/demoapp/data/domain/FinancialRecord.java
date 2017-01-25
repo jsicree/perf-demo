@@ -10,6 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * The financial information for a stock on a specific date.
+ * 
+ * @author joseph_sicree
+ *
+ */
 @Entity(name="INSTRUMENT_INFO")
 public class FinancialRecord {
 

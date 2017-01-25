@@ -9,14 +9,30 @@ import org.slf4j.LoggerFactory;
 import demo.app.demoapp.services.MemoryService;
 import demo.app.demoapp.services.ServiceException;
 
+/**
+ * Implementation of a simple memory service.
+ * 
+ * @author joseph_sicree
+ *
+ */
 public class MemoryServiceImpl implements MemoryService {
 
 	protected final static Logger log = LoggerFactory.getLogger(MemoryServiceImpl.class);
 	
+	// A map that uses an improperly implemented key class
 	private final static Map<BadKey, byte[]> BAD_KEY_MAP = new HashMap<BadKey, byte[]>();
+
+	// A map the uses a properly implemented key class
 	private final static Map<GoodKey, byte[]> GOOD_KEY_MAP = new HashMap<GoodKey, byte[]>();
 
-	
+	/**
+	 * A key class that is missing an equals() method. The superclass
+	 * equals would not properly compare two instance based on 
+	 * their id values, meaning that BadKey(1) != BadKey(1).
+	 * 
+	 * @author joseph_sicree
+	 *
+	 */
 	static class BadKey {
 
 		Integer id;
@@ -32,6 +48,14 @@ public class MemoryServiceImpl implements MemoryService {
 
 	}
 
+	/**
+	 * A key class that implements an equals() method. The equals()
+	 * will properly compare two instance based on 
+	 * their id values, meaning that GoodKey(1) == GoodKey(1).
+	 * 
+	 * @author joseph_sicree
+	 *
+	 */
 	static class GoodKey {
 
 		Integer id;
@@ -64,9 +88,17 @@ public class MemoryServiceImpl implements MemoryService {
 		
 	}
 	
+	/**
+	 * Default ctor.
+	 * 
+	 */
 	public MemoryServiceImpl() {
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see demo.app.demoapp.services.MemoryService#populateBadKeyMap(java.lang.Integer, java.lang.Integer)
+	 */
 	public void populateBadKeyMap(final Integer numIterations, final Integer chunkSize) throws ServiceException {
 
 		log.info("Calling populateBadKeyMap with numIterations = " + numIterations + ", chunkSize = " + chunkSize);
@@ -83,6 +115,10 @@ public class MemoryServiceImpl implements MemoryService {
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see demo.app.demoapp.services.MemoryService#populateGoodKeyMap(java.lang.Integer, java.lang.Integer)
+	 */
 	public void populateGoodKeyMap(final Integer numIterations, final Integer chunkSize) throws ServiceException {
 
 		log.info("Calling populateGoodKeyMap with numIterations = " + numIterations + ", chunkSize = " + chunkSize);
@@ -99,12 +135,20 @@ public class MemoryServiceImpl implements MemoryService {
 		
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see demo.app.demoapp.services.MemoryService#clearBadKeyMap()
+	 */
 	public void clearBadKeyMap() throws ServiceException {
 		log.info("BadKeyMap size before clear: " + BAD_KEY_MAP.size());
 		BAD_KEY_MAP.clear();
 		log.info("BadKeyMap size after clear: " + BAD_KEY_MAP.size());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see demo.app.demoapp.services.MemoryService#clearGoodKeyMap()
+	 */
 	public void clearGoodKeyMap() throws ServiceException {
 		log.info("GoodKeyMap size before clear: " + GOOD_KEY_MAP.size());
 		GOOD_KEY_MAP.clear();

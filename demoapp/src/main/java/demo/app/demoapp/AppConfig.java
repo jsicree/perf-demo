@@ -18,6 +18,12 @@ import demo.app.demoapp.services.impl.CalculationServiceImpl;
 import demo.app.demoapp.services.impl.FinancialServiceImpl;
 import demo.app.demoapp.services.impl.MemoryServiceImpl;
 
+/**
+ * Spring application config class.
+ * 
+ * @author joseph_sicree
+ *
+ */
 @Configuration
 @EnableAsync
 @PropertySource({ "classpath:demoapp_config.properties" })
@@ -31,32 +37,61 @@ public class AppConfig {
 
 	@Resource
 	private Environment environment;
-	
+
+	/**
+	 * Default ctor
+	 */
 	public AppConfig() {
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Return the <code>AccountService</code> implementation.
+	 * 
+	 * @return A <code>AccountService</code>
+	 */
 	@Bean
 	public AccountService accountService() {
 		return new AccountServiceSimpleImpl();
 	}
 
+	/**
+	 * Return the <code>CalculationService</code> implementation.
+	 * 
+	 * @return A <code>CalculationService</code>
+	 */
 	@Bean
 	public CalculationService calculationService() {
 		return new CalculationServiceImpl(Integer.parseInt(environment.getRequiredProperty(PROPERTY_NAME_COMPUTE_COMPOUND_INTEREST_DELAY_MS)));
 	}
 
+	/**
+	 * Return the <code>MemoryService</code> implementation.
+	 * 
+	 * @return A <code>MemoryService</code>
+	 */
 	@Bean
 	public MemoryService memoryService() {
 		return new MemoryServiceImpl();
 	}
 
+	/**
+	 * Return the <code>FinancialService</code> implementation.
+	 * 
+	 * @return A <code>FinancialService</code>
+	 */	
 	@Bean
 	public FinancialService financialService() {
 		return new FinancialServiceImpl();
 	}
 	
 	
+	/**
+	 * Return the <code>ThreadPoolTaskExecutor</code> implementation.
+	 * Thread properties core pool size, max pool size and queue capacity
+	 * are defined in a properties file.
+	 * 
+	 * @return A <code>ThreadPoolTaskExecutor</code>
+	 */
 	@Bean
 	public ThreadPoolTaskExecutor taskExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();

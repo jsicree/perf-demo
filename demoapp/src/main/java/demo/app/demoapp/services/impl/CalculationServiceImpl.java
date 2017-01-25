@@ -24,6 +24,12 @@ import demo.app.demoapp.data.dto.Money;
 import demo.app.demoapp.services.CalculationService;
 import demo.app.demoapp.services.ServiceException;
 
+/**
+ * Implementation of the calculation service.
+ * 
+ * @author joseph_sicree
+ *
+ */
 @Service
 public class CalculationServiceImpl implements CalculationService {
 
@@ -32,17 +38,30 @@ public class CalculationServiceImpl implements CalculationService {
 	@Autowired
 	protected ThreadPoolTaskExecutor taskExecutor;
 
+	// A seed for a random delay in the processing methods.
 	protected Integer computeDelay; 
-	
+
+	/**
+	 * Default ctor
+	 */
 	public CalculationServiceImpl() {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param computeDelay
+	 */
 	public CalculationServiceImpl(Integer computeDelay) {
 		super();
 		this.computeDelay = computeDelay;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see demo.app.demoapp.services.CalculationService#calculateCompoundInterest(java.util.List, java.util.Date, java.lang.Integer, demo.app.demoapp.data.dto.Frequency, java.lang.Boolean)
+	 */
 	public List<InterestResult> calculateCompoundInterest(final List<AccountInfo> accounts, final Date startDate,
 			final Integer intervals, final Frequency freq, final Boolean includeBreakdowns) throws ServiceException {
 		Long startTime = System.currentTimeMillis();
@@ -59,6 +78,10 @@ public class CalculationServiceImpl implements CalculationService {
 		return resultList;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see demo.app.demoapp.services.CalculationService#calculateCompoundInterestAsync(java.util.List, java.util.Date, java.lang.Integer, demo.app.demoapp.data.dto.Frequency, java.lang.Boolean)
+	 */
 	public List<InterestResult> calculateCompoundInterestAsync(final List<AccountInfo> accounts, final Date startDate,
 			final Integer intervals, final Frequency freq, final Boolean includeBreakdowns) throws ServiceException {
 		Long startTime = System.currentTimeMillis();
@@ -105,6 +128,18 @@ public class CalculationServiceImpl implements CalculationService {
 		return resultList;
 	}
 
+	/**
+	 * Compute the compound interest for an account.
+	 * 
+	 * @param a
+	 * @param startDate
+	 * @param intervals
+	 * @param intervalList
+	 * @param freq
+	 * @param includeBreakdowns
+	 * 
+	 * @return A <code>InterestResult</code>
+	 */
 	private InterestResult computeInterest(final AccountInfo a, final Date startDate, final Integer intervals,
 			final ArrayList<Date> intervalList, final Frequency freq, final Boolean includeBreakdowns) {
 		InterestResult result = new InterestResult();
@@ -119,12 +154,17 @@ public class CalculationServiceImpl implements CalculationService {
 		Double currentBalance = a.getBalance().getValue();
 		res.put(startDate, a.getBalance());
 
-		log.info("CompoundInterest delay (ms): " + computeDelay);
+		//log.info("CompoundInterest delay (ms): " + computeDelay);
 
 		for (Date d : intervalList) {
 			Double interest = currentBalance * a.getRate();
 			currentBalance += interest;
 			res.put(d, new Money(currentBalance));
+
+			// The delay is a random "pause" in processing to 
+			// simulate other processing occurring behind the 
+			// scenes. The seed for the delay is set in a 
+			// properties file.
 			long delay = new Double(Math.random() * computeDelay).longValue();
 			// log.info("Delay (ms): " + delay);
 			try {
@@ -144,6 +184,15 @@ public class CalculationServiceImpl implements CalculationService {
 
 	}
 
+	/**
+	 * Create a list of dates based on the frequency and number of intervals.
+	 * 
+	 * @param startDate
+	 * @param intervals
+	 * @param freq
+	 * 
+	 * @return A <code>List</code> of <code>Date</code>
+	 */
 	private ArrayList<Date> createIntervals(final Date startDate, final Integer intervals, final Frequency freq) {
 		ArrayList<Date> result = new ArrayList<Date>();
 

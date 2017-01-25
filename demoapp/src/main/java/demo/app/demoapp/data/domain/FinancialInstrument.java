@@ -6,6 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * A stock.
+ * 
+ * @author joseph_sicree
+ *
+ */
 @Entity(name="INSTRUMENT")
 public class FinancialInstrument {
 	
