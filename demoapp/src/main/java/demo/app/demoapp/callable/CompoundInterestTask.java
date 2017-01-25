@@ -11,6 +11,13 @@ import demo.app.demoapp.data.dto.Frequency;
 import demo.app.demoapp.data.dto.InterestResult;
 import demo.app.demoapp.data.dto.Money;
 
+/**
+ * Wraps an <code>InterestResult</code> in a <code>Callable</code>
+ * for use in the asynchronous service implementation.
+ * 
+ * @author joseph_sicree
+ *
+ */
 public class CompoundInterestTask implements Callable<InterestResult> {
 
 	private AccountInfo a;
@@ -21,10 +28,24 @@ public class CompoundInterestTask implements Callable<InterestResult> {
 	private Boolean includeBreakdowns;
 	private Integer computeDelay;
 	
+	/**
+	 * Default ctor
+	 */
 	public CompoundInterestTask() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param a
+	 * @param startDate
+	 * @param intervals
+	 * @param intervalList
+	 * @param freq
+	 * @param includeBreakdowns
+	 * @param computeDelay
+	 */
 	public CompoundInterestTask(AccountInfo a, Date startDate, Integer intervals, ArrayList<Date> intervalList,
 			Frequency freq, Boolean includeBreakdowns, Integer computeDelay) {
 		super();
@@ -37,8 +58,11 @@ public class CompoundInterestTask implements Callable<InterestResult> {
 		this.computeDelay = computeDelay;
 	}
 
-
-
+	/**
+	 * Compute the compound interest for an account.
+	 * 
+	 * @return The result of the calculation.
+	 */
 	public InterestResult call() throws Exception {
 		InterestResult result = new InterestResult();
 		result.setAccountIdentifier(a.getIdentifier());
@@ -56,6 +80,11 @@ public class CompoundInterestTask implements Callable<InterestResult> {
 			Double interest = currentBalance * a.getRate();
 			currentBalance += interest;
 			res.put(d, new Money(currentBalance));
+			
+			// The delay is a random "pause" in processing to 
+			// simulate other processing occurring behind the 
+			// scenes. The seed for the delay is set in a 
+			// properties file.
 			long delay = new Double(Math.random() * computeDelay).longValue();
 			// log.info("Delay (ms): " + delay);
 			try {

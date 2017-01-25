@@ -5,6 +5,12 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import demo.app.demoapp.AppConfig;
 import demo.app.demoapp.data.jpa.JpaConfig;
 
+/**
+ * Initializer for Spring MVC
+ * 
+ * @author joseph_sicree
+ *
+ */
 public class MvcWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override

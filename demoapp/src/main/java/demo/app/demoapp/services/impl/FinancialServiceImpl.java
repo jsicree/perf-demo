@@ -16,6 +16,12 @@ import demo.app.demoapp.data.jpa.repository.FinancialRecordRepository;
 import demo.app.demoapp.services.FinancialService;
 import demo.app.demoapp.services.ServiceException;
 
+/**
+ * Implementation of the financial lookup service.
+ * 
+ * @author joseph_sicree
+ *
+ */
 @Service
 public class FinancialServiceImpl implements FinancialService {
 
@@ -27,18 +33,33 @@ public class FinancialServiceImpl implements FinancialService {
 	@Autowired
 	FinancialRecordRepository financialRecordRepository;
 	
+	/**
+	 * Default ctor
+	 */
 	public FinancialServiceImpl() {
 		// TODO Auto-generated constructor stub
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see demo.app.demoapp.services.FinancialService#getAllFinancialInstruments()
+	 */
 	public List<FinancialInstrument> getAllFinancialInstruments() throws ServiceException {
 		return financialInstrumentRepository.findAll();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see demo.app.demoapp.services.FinancialService#getAllFinancialRecords()
+	 */
 	public List<FinancialRecord> getAllFinancialRecords() throws ServiceException {
 		return financialRecordRepository.findAll();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see demo.app.demoapp.services.FinancialService#getFinancialRecordsForDate_v1(java.util.List, java.util.Date)
+	 */
 	public List<FinancialRecord> getFinancialRecordsForDate_v1(List<String> symbolList, Date date)
 			throws ServiceException {
 		
@@ -55,6 +76,10 @@ public class FinancialServiceImpl implements FinancialService {
 		
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see demo.app.demoapp.services.FinancialService#getFinancialRecordsForDate_v2(java.util.List, java.util.Date)
+	 */
 	public List<FinancialRecord> getFinancialRecordsForDate_v2(List<String> symbolList, Date date)
 			throws ServiceException {
 		

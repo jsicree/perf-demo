@@ -19,6 +19,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+/**
+ * Configuration class for MVC. Properties are specified
+ * in a properties file.
+ * 
+ * @author joseph_sicree
+ *
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "demo.app.demoweb.mvc.controller" })

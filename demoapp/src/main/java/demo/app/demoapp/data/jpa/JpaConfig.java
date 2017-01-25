@@ -26,6 +26,13 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+/**
+ * A configuration class for Spring JPA. Connection properties
+ * are set in a properties file.
+ * 
+ * @author joseph_sicree
+ *
+ */
 @Configuration
 @EnableJpaRepositories(basePackages = { "demo.app.demoapp.data.jpa.repository" })
 @PropertySource({ "classpath:demoapp_jpa.properties" })
@@ -46,10 +53,18 @@ public class JpaConfig {
 	@Resource
 	private Environment environment;
 	
+	/**
+	 * Default ctor
+	 */
 	public JpaConfig() {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Return a configured data source.
+	 * 
+	 * @return
+	 */
 	@Bean
 	public ComboPooledDataSource dataSource() {
 
@@ -74,6 +89,14 @@ public class JpaConfig {
 		return ds;
 	}	
 	
+	/**
+	 * Return an entity manager factory
+	 * 
+	 * @param dataSource
+	 * @param jpaVendorAdapter
+	 * 
+	 * @return A <code>LocalContainerEntityManagerFactoryBean</code>
+	 */
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(
 			DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
@@ -97,6 +120,10 @@ public class JpaConfig {
 		return lef;
 	}
 
+	/**
+	 * 
+	 * @return A <code>JpaVendorAdapter</code>
+	 */
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
@@ -106,12 +133,22 @@ public class JpaConfig {
 		return hibernateJpaVendorAdapter;
 	}
 
+	/**
+	 * 
+	 * @param entityManagerFactory
+	 * 
+	 * @return A <code>PlatformTransactionManager</code>
+	 */
 	@Bean
 	public PlatformTransactionManager transactionManager(
 			EntityManagerFactory entityManagerFactory) {
 		return new JpaTransactionManager(entityManagerFactory);
 	}
-	
+
+	/**
+	 * 
+	 * @return A <code>CacheManager</code>
+	 */
 	@Bean
     public CacheManager cacheManager() {
         // configure and return an implementation of Spring's CacheManager SPI

@@ -1,5 +1,11 @@
 package demo.app.demoweb;
 
+/**
+ * Version enum.
+ * 
+ * @author joseph_sicree
+ *
+ */
 public enum ServiceVersion {
 	VERSION_1("v1"), 
 	VERSION_2("v2");
