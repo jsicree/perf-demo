@@ -9,4 +9,4 @@ The project currently contains the following performance issues:
 2. Memory Leaks
 3. N+1 Database Query Issue
 
-The project is to be used in an upcoming performance podcast demonstrating deployment of an application via AWS CodePipeline and utilizing Dynatrace AppMon and Apica LoadTest. Additional information on the podcast can be found here (TBD).
+_The project was used in a performance webinar sponsored by Dynatrace demonstrating deployment of an application via AWS CodePipeline and utilizing Dynatrace AppMon and Apica LoadTest. A recording of the webinar can be found here: [Online Perf Clinic – Scaling DevOps Deployments with AWS CodePipeline and Dynatrace AppMon](https://youtu.be/tb4xJ5im8jw?list=PLqt2rd0eew1bmDn54E2_M2uvbhm_WxY_6)_
