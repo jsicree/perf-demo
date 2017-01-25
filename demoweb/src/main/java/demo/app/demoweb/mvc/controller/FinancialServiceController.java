@@ -25,7 +25,12 @@ import demo.app.demoweb.mvc.data.FinancialRecordResponse;
 import demo.app.demoweb.mvc.data.Status;
 
 /**
- * Handles requests for the application home page.
+ * Web service controller for the <code>FinancialService</code>. Defines
+ * the computeCompoundInterest web service and allows access to all
+ * available versions.
+ * 
+ * @author joseph.sicree
+ *
  */
 @RestController
 @RequestMapping("finance")
@@ -42,17 +47,36 @@ public class FinancialServiceController {
 	protected final static String DATE_FORMAT = "MM/dd/yyyy";
 	
 	protected final static SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
-
+	
+	/**
+	 * GetFinancialRecordsByDate web service that uses an external property to determine the version.
+	 * 
+	 * @param request
+	 * @return A <code>FinancialRecordResponse</code>
+	 */
 	@RequestMapping(value = "/getFinancialRecordsByDate", method = RequestMethod.POST, produces = "application/json")
 	public FinancialRecordResponse getFinancialRecordsByDate(@RequestBody FinancialRecordRequest request) {
 		return runGetFinancialRecordsByDate(request, ServiceVersion.valueOf(financeActiveVersion));
 	}
 
+	/**
+	 * GetFinancialRecordsByDate web service - Version 1. This version has multiple N+1 query problems.
+	 * 
+	 * @param request
+	 * @return A <code>FinancialRecordResponse</code>
+	 */
 	@RequestMapping(value = "/v1/getFinancialRecordsByDate", method = RequestMethod.POST, produces = "application/json")
 	public FinancialRecordResponse getFinancialRecordsByDate_v1(@RequestBody FinancialRecordRequest request) {
 		return runGetFinancialRecordsByDate(request, ServiceVersion.VERSION_1);
 	}
 
+	/**
+	 * GetFinancialRecordsByDate web service - Version 2. This version has one N+1 query problem.
+	 * A fix for this is TBD.
+	 * 
+	 * @param request
+	 * @return A <code>FinancialRecordResponse</code>
+	 */
 	@RequestMapping(value = "/v2/getFinancialRecordsByDate", method = RequestMethod.POST, produces = "application/json")
 	public FinancialRecordResponse getFinancialRecordsByDate_v2(@RequestBody FinancialRecordRequest request) {
 		return runGetFinancialRecordsByDate(request, ServiceVersion.VERSION_2);

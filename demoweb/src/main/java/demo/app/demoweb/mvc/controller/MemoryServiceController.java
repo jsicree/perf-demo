@@ -16,7 +16,12 @@ import demo.app.demoweb.mvc.data.DataMapResponse;
 import demo.app.demoweb.mvc.data.Status;
 
 /**
- * Handles requests for the application home page.
+ * Web service controller for the <code>MemoryService</code>. Defines
+ * the addDataToMap and clearMap web services and allows access to all
+ * available versions.
+ * 
+ * @author joseph.sicree
+ *
  */
 @RestController
 @RequestMapping("memory")
@@ -30,31 +35,67 @@ public class MemoryServiceController {
 
 	protected final static Logger log = LoggerFactory.getLogger(MemoryServiceController.class);
 
+	/**
+	 * AddDataToMap web service that uses an external property to determine the version.
+	 * 
+	 * @param request
+	 * @return A <code>DataMapResponse</code>
+	 */	
 	@RequestMapping(value = "/addDataToMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse addDataToMap(@RequestBody DataMapRequest request) {
 		return runAddDataToMap(request, ServiceVersion.valueOf(memoryActiveVersion));
 	}
 	
+	/**
+	 * ClearMap web service that uses an external property to determine the version.
+	 * 
+	 * @param request
+	 * @return A <code>DataMapResponse</code>
+	 */	
 	@RequestMapping(value = "/clearMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse clearMap() {
 		return runClearMap(ServiceVersion.valueOf(memoryActiveVersion));
 	}
 
+	/**
+	 * AddDataToMap web service - Version 1. This version uses a map with a bad key.
+	 * 
+	 * @param request
+	 * @return A <code>DataMapResponse</code>
+	 */	
 	@RequestMapping(value = "/v1/addDataToMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse addDataToBadKeyMap(@RequestBody DataMapRequest request) {
 		return runAddDataToMap(request, ServiceVersion.VERSION_1);
 	}
 	
+	/**
+	 * ClearMap web service - Version 1. This version clears the map with a bad key.
+	 * 
+	 * @param request
+	 * @return A <code>DataMapResponse</code>
+	 */	
 	@RequestMapping(value = "/v1/clearMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse clearBadKeyMap() {
 		return runClearMap(ServiceVersion.VERSION_1);
 	}
 	
+	/**
+	 * AddDataToMap web service - Version 2. This version uses a map with a good key.
+	 * 
+	 * @param request
+	 * @return A <code>DataMapResponse</code>
+	 */	
 	@RequestMapping(value = "/v2/addDataToMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse addDataToGoodKeyMap(@RequestBody DataMapRequest request) {
 		return runAddDataToMap(request, ServiceVersion.VERSION_2);
 	}
 
+	/**
+	 * ClearMap web service - Version 2. This version clears the map with the good key.
+	 * 
+	 * @param request
+	 * @return A <code>DataMapResponse</code>
+	 */	
 	@RequestMapping(value = "/v2/clearMap", method = RequestMethod.POST, produces = "application/json")
 	public DataMapResponse clearGoodKeyMap() {
 		return runClearMap(ServiceVersion.VERSION_2);

@@ -19,7 +19,12 @@ import demo.app.demoweb.mvc.data.CompoundInterestResponse;
 import demo.app.demoweb.mvc.data.Status;
 
 /**
- * Handles requests for the application home page.
+ * Web service controller for the <code>CalculationService</code>. Defines
+ * the computeCompoundInterest web service and allows access to all
+ * available versions.
+ * 
+ * @author joseph.sicree
+ *
  */
 @RestController
 @RequestMapping("calculate")
@@ -33,6 +38,12 @@ public class CalculationServiceController {
 
 	protected final static Logger log = LoggerFactory.getLogger(CalculationServiceController.class);
 	
+	/**
+	 * ComputeCompoundInterest web service that uses an external property to determine the version.
+	 * 
+	 * @param request
+	 * @return A <code>CompoundInterestResponse</code>
+	 */
 	@RequestMapping(value = "/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
 	public CompoundInterestResponse computeCompoundInterest(@RequestBody CompoundInterestRequest request) {
 
@@ -40,6 +51,12 @@ public class CalculationServiceController {
 		
 	}
 		
+	/**
+	 * ComputeCompoundInterest web service - Version 1. This version operates synchronously.
+	 * 
+	 * @param request
+	 * @return A <code>CompoundInterestResponse</code>
+	 */
 	@RequestMapping(value = "/v1/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
 	public CompoundInterestResponse computeCompoundInterest_v1(@RequestBody CompoundInterestRequest request) {
 
@@ -48,6 +65,12 @@ public class CalculationServiceController {
 	}
 
 
+	/**
+	 * ComputeCompoundInterest web service - Version 2. This version operates asynchronously.
+	 * 
+	 * @param request
+	 * @return A <code>CompoundInterestResponse</code>
+	 */
 	@RequestMapping(value = "/v2/computeCompoundInterest", method = RequestMethod.POST, produces = "application/json")
 	public CompoundInterestResponse computeCompoundInterest_v2(@RequestBody CompoundInterestRequest request) {
 
