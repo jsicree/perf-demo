@@ -33,7 +33,8 @@ public class MemoryServiceTest {
 		log.info(">> Entering testOutOfMemoryViaBadKey");
 
 		try {
-			memoryService.populateBadKeyMap(new Integer(10000), new Integer(10000));
+			memoryService.populateBadKeyMap(new Integer(100), new Integer(10000));
+			memoryService.populateBadKeyMap(new Integer(100), new Integer(10000));
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,4 +42,19 @@ public class MemoryServiceTest {
 		log.info("<< Leaving testOutOfMemoryViaBadKey");
 	}
 
+	@Test
+	public void testOutOfMemoryViaGoodKey() {
+
+		log.info(">> Entering testOutOfMemoryViaGoodKey");
+
+		try {
+			memoryService.populateGoodKeyMap(new Integer(100), new Integer(10000));
+			memoryService.populateGoodKeyMap(new Integer(100), new Integer(10000));
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		log.info("<< Leaving testOutOfMemoryViaGoodKey");
+	}
+	
 }
