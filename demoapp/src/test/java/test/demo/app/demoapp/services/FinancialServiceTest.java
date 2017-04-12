@@ -40,7 +40,7 @@ public class FinancialServiceTest {
 	}
 		
 	@Test
-	@Ignore
+//	@Ignore
 	public void testGetAllFinancialInstruments() {
 
 		log.info(">> Entering testGetAllFinancialInstruments");
@@ -62,7 +62,7 @@ public class FinancialServiceTest {
 	}
 
 	@Test
-	@Ignore
+//	@Ignore
 	public void testGetAllFinancialRecords() {
 
 		log.info(">> Entering testGetAllFinancialRecords");
@@ -84,7 +84,7 @@ public class FinancialServiceTest {
 	}
 
 	@Test
-	@Ignore
+//	@Ignore
 	public void testGetFinancialRecordsForDate_v1() {
 
 		log.info(">> Entering testGetFinancialRecordsForDate_v1");
@@ -116,7 +116,7 @@ public class FinancialServiceTest {
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	public void testGetFinancialRecordsForDate_v2() {
 
 		log.info(">> Entering testGetFinancialRecordsForDate_v2");
