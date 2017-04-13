@@ -2,7 +2,7 @@
 <jmeterTestPlan version="1.2" properties="3.1" jmeter="3.1 r1770033">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Perf Demo" enabled="true">
-      <stringProp name="TestPlan.comments">To run non-gui: jmeter -n -t Demo-App-Service-Test-jmeter.jmx</stringProp>
+      <stringProp name="TestPlan.comments">To run non-gui: jmeter -n -t PerfDemo_WebService_LoadTest.jmx</stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -15,7 +15,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="test_name" elementType="Argument">
             <stringProp name="Argument.name">test_name</stringProp>
-            <stringProp name="Argument.value">computeCompoundInterest</stringProp>
+            <stringProp name="Argument.value">perfDemo_LoadTest</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="protocol" elementType="Argument">
@@ -38,19 +38,19 @@
             <stringProp name="Argument.value">/demoweb/calculate/computeCompoundInterest</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="summary_filename" elementType="Argument">
-            <stringProp name="Argument.name">summary_filename</stringProp>
-            <stringProp name="Argument.value">computeCompoundInterest_${__time(yyyyMMdd_HHmm,)}_summary.csv</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
           <elementProp name="request_filename" elementType="Argument">
             <stringProp name="Argument.name">request_filename</stringProp>
             <stringProp name="Argument.value">PT001_computeCompoundInterest.csv</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="summary_filename" elementType="Argument">
+            <stringProp name="Argument.name">summary_filename</stringProp>
+            <stringProp name="Argument.value">perfDemo_LoadTest_${__time(yyyyMMdd_HHmm,)}_summary.csv</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
           <elementProp name="data_dir" elementType="Argument">
             <stringProp name="Argument.name">data_dir</stringProp>
-            <stringProp name="Argument.value">requests/</stringProp>
+            <stringProp name="Argument.value">../requests/</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="results_dir" elementType="Argument">
@@ -85,7 +85,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="test_name" elementType="Argument">
             <stringProp name="Argument.name">test_name</stringProp>
-            <stringProp name="Argument.value">getFinancialRecordsByDate</stringProp>
+            <stringProp name="Argument.value">perfDemo_LoadTest</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="protocol" elementType="Argument">
@@ -108,19 +108,19 @@
             <stringProp name="Argument.value">/demoweb/finance/getFinancialRecordsByDate</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="summary_filename" elementType="Argument">
-            <stringProp name="Argument.name">summary_filename</stringProp>
-            <stringProp name="Argument.value">getFinancialRecordsByDate_${__time(yyyyMMdd_HHmm,)}_summary.csv</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
           <elementProp name="request_filename" elementType="Argument">
             <stringProp name="Argument.name">request_filename</stringProp>
             <stringProp name="Argument.value">PT002_getFinancialRecordsByDate.csv</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="summary_filename" elementType="Argument">
+            <stringProp name="Argument.name">summary_filename</stringProp>
+            <stringProp name="Argument.value">perfDemo_LoadTest_${__time(yyyyMMdd_HHmm,)}_summary.csv</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
           <elementProp name="data_dir" elementType="Argument">
             <stringProp name="Argument.name">data_dir</stringProp>
-            <stringProp name="Argument.value">requests/</stringProp>
+            <stringProp name="Argument.value">../requests/</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="results_dir" elementType="Argument">
@@ -155,7 +155,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="test_name" elementType="Argument">
             <stringProp name="Argument.name">test_name</stringProp>
-            <stringProp name="Argument.value">addDataToMap</stringProp>
+            <stringProp name="Argument.value">perfDemo_LoadTest</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="protocol" elementType="Argument">
@@ -178,19 +178,19 @@
             <stringProp name="Argument.value">/demoweb/memory/addDataToMap</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="summary_filename" elementType="Argument">
-            <stringProp name="Argument.name">summary_filename</stringProp>
-            <stringProp name="Argument.value">addDataToMap_${__time(yyyyMMdd_HHmm,)}_summary.csv</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
           <elementProp name="request_filename" elementType="Argument">
             <stringProp name="Argument.name">request_filename</stringProp>
             <stringProp name="Argument.value">PT003_addDataToMap.csv</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="summary_filename" elementType="Argument">
+            <stringProp name="Argument.name">summary_filename</stringProp>
+            <stringProp name="Argument.value">perfDemo_LoadTest_${__time(yyyyMMdd_HHmm,)}_summary.csv</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
           <elementProp name="data_dir" elementType="Argument">
             <stringProp name="Argument.name">data_dir</stringProp>
-            <stringProp name="Argument.value">requests/</stringProp>
+            <stringProp name="Argument.value">../requests/</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="results_dir" elementType="Argument">
@@ -279,7 +279,7 @@
           <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
         </ConfigTestElement>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${test_name}" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${web_service_request}" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
