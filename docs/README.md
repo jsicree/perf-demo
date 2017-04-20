@@ -1,1 +1,1 @@
-The docs directory contains the presentation decks for the original Dynatrace webinar in Jan 2017 and another presentation given at the CMG Boston meeting in April 2017. The difference in the 2 presentations is the load test provider.
+The docs directory contains the presentation decks for the original Dynatrace webinar in Jan 2017 and another presentation given at the CMG Boston meeting in April 2017. The difference in the 2 presentations is the load test provider. The Dynatrace webinar used Apica LoadTest and for the CMG Boston meeting, we used jMeter and BlazeMeter.
