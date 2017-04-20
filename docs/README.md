@@ -1,0 +1,1 @@
+The docs directory contains the presentation decks for the original Dynatrace webinar in Jan 2017 and another presentation given at the CMG Boston meeting in April 2017. The difference in the 2 presentations is the load test provider.
