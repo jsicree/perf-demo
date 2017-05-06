@@ -9,4 +9,5 @@ The project currently contains the following performance issues:
 2. Memory Leaks
 3. N+1 Database Query Issue
 
+This application was used in presentations on Automating Performance Testing via AWS CodePipeline and Dynatace. For more information, please see the [wiki](https://github.com/jsicree/perf-demo/wiki)
 
