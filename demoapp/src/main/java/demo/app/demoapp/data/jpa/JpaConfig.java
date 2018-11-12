@@ -1,6 +1,5 @@
 package demo.app.demoapp.data.jpa;
 
-import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -9,7 +8,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
@@ -17,14 +15,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * A configuration class for Spring JPA. Connection properties
@@ -36,7 +33,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @Configuration
 @EnableJpaRepositories(basePackages = { "demo.app.demoapp.data.jpa.repository" })
 @PropertySource({ "classpath:demoapp_jpa.properties" })
-@EnableCaching
+//@EnableCaching
 public class JpaConfig {
 
 	private static final String PROPERTY_NAME_DATABASE_DRIVER_CLASS = "db.driverClass";
@@ -66,21 +63,16 @@ public class JpaConfig {
 	 * @return
 	 */
 	@Bean
-	public ComboPooledDataSource dataSource() {
+	public DataSource dataSource() {
 
-		ComboPooledDataSource ds = null;
+		DriverManagerDataSource ds = null;
 
-		ds = new ComboPooledDataSource();
-		try {
-			ds.setDriverClass(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER_CLASS));
-		} catch (PropertyVetoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ds = new DriverManagerDataSource();
+		ds.setDriverClassName(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER_CLASS));
 
 		String url = environment.getRequiredProperty(PROPERTY_NAME_DATABASE_URL);		
-		ds.setJdbcUrl(url);		
-		ds.setUser(environment
+		ds.setUrl(url);		
+		ds.setUsername(environment
 				.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
 		ds.setPassword(environment
 				.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));

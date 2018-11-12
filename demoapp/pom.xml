@@ -111,8 +111,8 @@
 			<version>${mysql.version}</version>
 		</dependency>
 
-
 		<!-- C3PO -->
+<!-- 
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
@@ -120,7 +120,7 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-
+ -->		
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
