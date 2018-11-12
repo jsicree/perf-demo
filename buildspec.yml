@@ -15,7 +15,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - mvn -f demoall/pom.xml install
+      - mvn -f demoall/pom.xml -DskipTests install 
   post_build:
     commands:
       - mv demoweb/target/demoweb.war demoweb.war
