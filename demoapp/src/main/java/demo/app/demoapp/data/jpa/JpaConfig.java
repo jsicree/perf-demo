@@ -84,8 +84,8 @@ public class JpaConfig {
 				.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
 		ds.setPassword(environment
 				.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
-		ds.setMinPoolSize(5);
-		ds.setMaxPoolSize(10);
+//		ds.setMinPoolSize(5);
+//		ds.setMaxPoolSize(10);
 		return ds;
 	}	
 	
